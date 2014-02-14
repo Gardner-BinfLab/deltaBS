@@ -12,7 +12,7 @@ use Statistics::Distributions;
 
 use Getopt::Long;
 
-my ($embl1, $embl2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $help);
+my ($embl1, $embl2, $pfamannot1, $pfamannot2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $help);
 my $identifier = int(rand(10000));
 
 &GetOptions(
@@ -20,6 +20,8 @@ my $identifier = int(rand(10000));
 	"e2|embl2=s"	 => \$embl2,
 	"o|outdir=s"	 => \$outdir,
 	"ol|orthlist=s"	 => \$orthlist,
+        "pa1|pfamannot1" => \$pfamannot1,
+        "pa2|pfamannot2" => \$pfamannot2,
 	"hp|hmmerpath=s" => \$hmmer_path,
 	"c|cpus=i"	 => \$cpus,
 	"hd|hmmlibdir=s" => \$hmm_lib_path,
@@ -110,6 +112,37 @@ my $embl1_genes = &write_CDS_fasta($embl1,$fasta1);
 my $embl2_genes = &write_CDS_fasta($embl2,$fasta2);
 print STDERR "done.\n" if $verbose;
 
+######################################################################
+#run hmmscan on these files with Pfam HMMs:
+
+if(not defined($pfamannot1)){
+    $pfamannot1 = "$embl1-pfam_hmmscan1.tbl";
+    print STDERR "Running hmmscan on [$embl1] sequences with Pfam HMMs..." if $verbose;
+    system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
+}
+
+if(not defined($pfamannot2)){
+    $pfamannot2 = "$embl1-pfam_hmmscan1.tbl";
+    print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs..." if $verbose;
+    system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
+}
+
+print STDERR "done hmmscan\47ing.\n" if $verbose;
+
+## want to add something in here that looks at whether the position in the hmm is about the same (or at least output these tables)
+
+#my $pfamannot1 = "tmp/DBS.8392/DELTABS_hmmscan1.tbl";
+#my $pfamannot2 = "tmp/DBS.8392/DELTABS_hmmscan2.tbl";
+#parse hmmscan results
+print STDERR "Parsing hmmscan results..." if $verbose;
+die "hmmscan results $pfamannot1 empty for $fasta1!" if (-z $pfamannot1);
+my $scan1 = &parse_hmmscan_tbl($pfamannot1);
+die "hmmscan results $pfamannot2 empty for $fasta2!" if (-z $pfamannot2);
+my $scan2 = &parse_hmmscan_tbl($pfamannot2);
+print STDERR "done.\n" if $verbose;
+
+######################################################################
+
 #get ortholog list
 my %orths;
 if(not defined($orthlist)){
@@ -133,27 +166,6 @@ if(not defined($orthlist)){
 	}
 	print STDERR "Done.\n" if $verbose;
 }
-
-#run hmmscan on these files
-my $table1 = "$tmp_dir/DELTABS_hmmscan1.tbl";
-my $table2 = "$tmp_dir/DELTABS_hmmscan2.tbl";
-print STDERR "Running hmmscan..." if $verbose;
-
-system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $table1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
-system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $table2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
-print STDERR "done.\n" if $verbose;
-
-## want to add something in here that looks at whether the position in the hmm is about the same (or at least output these tables)
-
-#my $table1 = "tmp/DBS.8392/DELTABS_hmmscan1.tbl";
-#my $table2 = "tmp/DBS.8392/DELTABS_hmmscan2.tbl";
-#parse hmmscan results
-print STDERR "Parsing hmmscan results..." if $verbose;
-die "hmmscan results $table1 empty for $fasta1!" if (-z $table1);
-my $scan1 = &parse_hmmscan_tbl($table1);
-die "hmmscan results $table2 empty for $fasta2!" if (-z $table2);
-my $scan2 = &parse_hmmscan_tbl($table2);
-print STDERR "done.\n" if $verbose;
 
 
 
@@ -699,6 +711,7 @@ sub parse_phmmer_tbl2 {
 ###################################################
 #                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
 # target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from to  from    to  acc description of target
+##DO SOMETHING CLEVER WITH SPLIT DOMAINS????
 sub parse_hmmscan_tbl {
 	my ($tbl) = @_;
 	my %hits;
