@@ -1,0 +1,668 @@
+ID   AL123456; SV 3; linear; genomic DNA; STD; PRO; 4411532 BP.
+XX
+AC   AL123456; BX842572-BX842584;
+XX
+PR   Project:PRJNA224;
+XX
+DT   18-JUL-2002 (Rel. 72, Created)
+DT   31-JAN-2013 (Rel. 115, Last updated, Version 8)
+XX
+DE   Mycobacterium tuberculosis H37Rv complete genome
+XX
+KW   complete genome.
+XX
+OS   Mycobacterium tuberculosis H37Rv
+OC   Bacteria; Actinobacteria; Actinobacteridae; Actinomycetales;
+OC   Corynebacterineae; Mycobacteriaceae; Mycobacterium;
+OC   Mycobacterium tuberculosis complex.
+XX
+RN   [1]
+RX   DOI; 10.1038/31159.
+RX   PUBMED; 9634230.
+RA   Cole S.T., Brosch R., Parkhill J., Garnier T., Churcher C., Harris D.,
+RA   Gordon S.V., Eiglmeier K., Gas S., Barry III C.E., Tekaia F., Badcock K.,
+RA   Basham D., Brown D., Chillingworth T., Connor R., Davies R., Devlin K.,
+RA   Feltwell T., Gentles S., Hamlin N., Holroyd S., Hornsby T., Jagels K.,
+RA   Krogh A., McLean J., Moule S., Murphy L., Oliver S., Osborne J.,
+RA   Quail M.A., Rajandream M.A., Rogers J., Rutter S., Seeger K., Skelton S.,
+RA   Squares S., Sqares R., Sulston J.E., Taylor K., Whitehead S., Barrell B.G.;
+RT   "Deciphering the biology of Mycobacterium tuberculosis from the complete
+RT   genome sequence";
+RL   Nature 393(6685):537-544(1998).
+XX
+RN   [2]
+RX   PUBMED; 12368430.
+RA   Camus J.C., Pryor M.J., Medigue C., Cole S.T.;
+RT   "Re-annotation of the genome sequence of Mycobacterium tuberculosis H37Rv";
+RL   Microbiology (Reading, Engl.) 148(Pt 10):2967-2973(2002).
+XX
+RN   [3]
+RP   1-4411529
+RA   Parkhill J.;
+RT   ;
+RL   Submitted (11-JUN-1998) to the INSDC.
+RL   Submitted on behalf of the Mycobacterium tuberculosis sequencing and
+RL   mapping teams, Sanger Centre, Wellcome Trust Genome Campus, Hinxton,
+RL   Cambridge CB10 1SA Unite de Genetique Moleculaire Bacterienne, Institut
+RL   Pasteur, 28 rue du Docteur Roux, 75724 Paris Cedex 15, France E-mail:
+RL   parkhill@sanger.ac.uk
+XX
+RN   [4]
+RX   DOI; 10.1016/j.tube.2010.09.008.
+RX   PUBMED; 20980199.
+RA   Lew J.M., Kapopoulou A., Jones L.M., Cole S.T.;
+RT   "TubercuList--10 years after";
+RL   Tuberculosis (Edinb) 91(1):1-7(2011).
+XX
+RN   [5]
+RP   1-4411532
+RA   Lew J.M.;
+RT   ;
+RL   Submitted (18-DEC-2012) to the INSDC.
+RL   Lew J., Ecole Polytechnique Federale de Lausanne, CH-1015, Lausanne,
+RL   Switzerland, and the Swiss Institute of Bioinformatics, CMU - Rue
+RL   Michel-Servet 1, 1211 Geneva 4, SWITZERLAND.
+XX
+DR   EuropePMC; PMC101927; 10894733.
+DR   EuropePMC; PMC1266029; 16159395.
+DR   EuropePMC; PMC128180; 12117918.
+DR   EuropePMC; PMC1326169; 16387854.
+DR   EuropePMC; PMC135229; 12142426.
+DR   EuropePMC; PMC135457; 12446641.
+DR   EuropePMC; PMC141938; 12486050.
+DR   EuropePMC; PMC1471987; 16614253.
+DR   EuropePMC; PMC1475714; 16789813.
+DR   EuropePMC; PMC1482720; 16677374.
+DR   EuropePMC; PMC1482959; 16740934.
+DR   EuropePMC; PMC1590026; 16901339.
+DR   EuropePMC; PMC193761; 12949087.
+DR   EuropePMC; PMC2168543; 17898156.
+DR   EuropePMC; PMC2228276; 18081934.
+DR   EuropePMC; PMC2358910; 18394163.
+DR   EuropePMC; PMC240732; 14569030.
+DR   EuropePMC; PMC2413405; 18560597.
+DR   EuropePMC; PMC2430213; 18507851.
+DR   EuropePMC; PMC2440308; 18584054.
+DR   EuropePMC; PMC2442614; 18505592.
+DR   EuropePMC; PMC2553098; 18793412.
+DR   EuropePMC; PMC2615007; 18439872.
+DR   EuropePMC; PMC2634755; 19146672.
+DR   EuropePMC; PMC2687942; 19478010.
+DR   EuropePMC; PMC2693488; 19217827.
+DR   EuropePMC; PMC2724981; 19578178.
+DR   EuropePMC; PMC2738538; 12453367.
+DR   EuropePMC; PMC2799434; 19951445.
+DR   EuropePMC; PMC2884946; 17259624.
+DR   EuropePMC; PMC2976163; 20805400.
+DR   EuropePMC; PMC2978697; 21085642.
+DR   EuropePMC; PMC2995261; 20825248.
+DR   EuropePMC; PMC2998474; 21083941.
+DR   EuropePMC; PMC308900; 14638775.
+DR   EuropePMC; PMC3089889; 21584191.
+DR   EuropePMC; PMC3101871; 21516081.
+DR   EuropePMC; PMC3165319; 21709103.
+DR   EuropePMC; PMC3207917; 22072964.
+DR   EuropePMC; PMC3232757; 21930879.
+DR   EuropePMC; PMC3318526; 22189117.
+DR   EuropePMC; PMC3347062; 22389481.
+DR   EuropePMC; PMC3401130; 22911768.
+DR   EuropePMC; PMC3517044; 20217870.
+DR   EuropePMC; PMC368364; 15006795.
+DR   EuropePMC; PMC60189; 11691918.
+DR   EuropePMC; PMC87843; 11230397.
+DR   EuropePMC; PMC94148; 10542185.
+XX
+CC   Note:
+CC   This annotation is from the TubercuList website, Release 26, Dec 2012
+CC   (URL: http://tuberculist.epfl.ch) (email: tuberculist@epfl.ch)
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   CDS             4340270..4341478
+FT                   /transl_table=11
+FT                   /gene="espE"
+FT                   /locus_tag="Rv3864"
+FT                   /product="ESX-1 secretion-associated protein EspE"
+FT                   /note="Rv3864, (MTCY01A6.04c), len: 402 aa. EspE, ESX-1
+FT                   secretion-associated protein, similar to
+FT                   Q49722|ML0405|B1620_C2_213|MLCL383.01 hypothetical 40.8 KDA
+FT                   protein from Mycobacterium leprae (394 aa) FASTA scores:
+FT                   opt: 397, E(): 1.2e-12, (31.0% identity in 410 aa overlap).
+FT                   Also similar to various proteins from several organisms
+FT                   e.g. Q9VYF9|CG12723 hypothetical protein from Drosophila
+FT                   melanogaster (Fruit fly) (450 aa), FASTA scores: opt:
+FT                   291,E(): 2.3e-07, (34.6% identity in 130 aa overlap);
+FT                   Q98UE3 procollagen ALPHA1(III) (fragment) from Xenopus
+FT                   laevis (African clawed frog) (117 aa) FASTA scores: opt:
+FT                   257, E(): 3.6e-06, (41.75% identity in 103 aa overlap);
+FT                   P27393|CA24_ASCSU collagen alpha 2(IV) chain precursor from
+FT                   Ascaris suum (Pig roundworm) (Ascaris lumbricoides) (1763
+FT                   aa), FASTA scores: opt: 273, E(): 5.7e-06, (32.1% identity
+FT                   in 240 aa overlap); etc. Also similar to
+FT                   O06267|Rv3616c|MTCY07H7B.06 (392 aa) FASTA scores: opt:
+FT                   389, E(): 3e-12, (31.6% identity in 399 aa overlap)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TDS9"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46693.1"
+FT                   /translation="MASGSGLCKTTSNFIWGQLLLLGEGIPDPGDIFNTGSSLFKQISD
+FT                   KMGLAIPGTNWIGQAAEAYLNQNIAQQLRAQVMGDLDKLTGNMISNQAKYVSDTRDVLR
+FT                   AMKKMIDGVYKVCKGLEKIPLLGHLWSWELAIPMSGIAMAVVGGALLYLTIMTLMNATN
+FT                   LRGILGRLIEMLTTLPKFPGLPGLPSLPDIIDGLWPPKLPDIPIPGLPDIPGLPDFKWP
+FT                   PTPGSPLFPDLPSFPGFPGFPEFPAIPGFPALPGLPSIPNLFPGLPGLGDLLPGVGDLG
+FT                   KLPTWTELAALPDFLGGFAGLPSLGFGNLLSFASLPTVGQVTATMGQLQQLVAAGGGPS
+FT                   QLASMGSQQAQLISSQAQQGGQQHATLVSDKKEDEEGVAEAERAPIDAGTAASQRGQEG
+FT                   TVL"
+FT   CDS             4341566..4341877
+FT                   /transl_table=11
+FT                   /gene="espF"
+FT                   /locus_tag="Rv3865"
+FT                   /product="ESX-1 secretion-associated protein EspF"
+FT                   /note="Rv3865, (MTCY01A6.03c), len: 103 aa. EspF, ESX-1
+FT                   secretion-associated protein, showing some similarity to
+FT                   O06268|Rv3615c|MTCY07H7B.07 hypothetical 10.8 KDA protein
+FT                   from Mycobacterium tuberculosis (103 aa), FASTA scores:
+FT                   opt: 198, E(): 7.5e-07, (36.25% identity in 102 aa
+FT                   overlap); Q49723|ML0406|B1620_C2_214|MLCL383.02
+FT                   hypothetical 11.1 KDA protein from Mycobacterium leprae
+FT                   (106 aa), FASTA scores: opt: 154, E(): 0.00071, (31.05%
+FT                   identity in 103 aa overlap)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TE06"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46694.1"
+FT                   /translation="MTGFLGVVPSFLKVLAGMHNEIVGDIKRATDTVAGISGRVQLTHG
+FT                   SFTSKFNDTLQEFETTRSSTGTGLQGVTSGLANNLLAAAGAYLKADDGLAGVIDKIFG"
+FT   CDS             4341880..4342731
+FT                   /transl_table=11
+FT                   /gene="espG1"
+FT                   /gene_synonym="snm5"
+FT                   /locus_tag="Rv3866"
+FT                   /product="ESX-1 secretion-associated protein EspG1"
+FT                   /note="Rv3866, (MTCY01A6.01c, MTV027.01), len: 283 aa.
+FT                   espG1, ESX-1 secretion-associated protein. N-terminal end
+FT                   highly similar to O33091|MLCB628.20c hypothetical 13.1 KDA
+FT                   protein from Mycobacterium leprae (122 aa), FASTA scores:
+FT                   opt: 260, E(): 2.1e-09, (43.6% identity in 117 aa overlap);
+FT                   and C-terminal end highly similar to O33090|MLCB628.19c
+FT                   hypothetical 36.7 KDA protein from Mycobacterium leprae
+FT                   (338 aa), FASTA scores: opt: 540, E(): 1.4e-26, (54.5%
+FT                   identity in 156 aa overlap). Also similar to Q9CD34|ML2530
+FT                   possible DNA-binding protein from Mycobacterium leprae (289
+FT                   aa), FASTA scores: opt: 146, E(): 0.058, (28.25% identity
+FT                   in 269 aa overlap) and O53694|Rv0289|MTV035.17 hypothetical
+FT                   31.6 KDA protein from Mycobacterium tuberculosis (295
+FT                   aa),FASTA scores: opt: 133, E(): 0.39, (28.15% identity in
+FT                   277 aa overlap)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TGZ4"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46695.1"
+FT                   /translation="MTGPSAAGRAGTADNVVGVEVTIDGMLVIADRLHLVDFPVTLGIR
+FT                   PNIPQEDLRDIVWEQVQRDLTAQGVLDLHGEPQPTVAEMVETLGRPDRTLEGRWWRRDI
+FT                   GGVMVRFVVCRRGDRHVIAARDGDMLVLQLVAPQVGLAGMVTAVLGPAEPANVEPLTGV
+FT                   ATELAECTTASQLTQYGIAPASARVYAEIVGNPTGWVEIVASQRHPGGTTTQTDAAAGV
+FT                   LDSKLGRLVSLPRRVGGDLYGSFLPGTQQNLERALDGLLELLPAGAWLDHTSDHAQASS
+FT                   RG"
+FT   CDS             4342770..4343321
+FT                   /transl_table=11
+FT                   /gene="espH"
+FT                   /locus_tag="Rv3867"
+FT                   /product="ESX-1 secretion-associated protein EspH"
+FT                   /note="Rv3867, (MTV027.02), len: 183 aa. EspH, ESX-1
+FT                   secretion-associated protein, highly similar to the
+FT                   hypothetical proteins from Mycobacterium leprae:
+FT                   Q9CDD6|ML0056 (169 aa) FASTA scores: opt: 403, E():
+FT                   1.8e-18, (48.2% identity in 166 aa overlap);
+FT                   Q49730|ML0407|B1620_C3_264|MLCL383.03 (216 aa), FASTA
+FT                   scores: opt: 517, E(): 1.7e-25, (51.45% identity in 175 aa
+FT                   overlap); and O33090|MLCB628.19c (338 aa), FASTA scores:
+FT                   opt: 403, E(): 3.4e-18, (48.2% identity in 166 aa overlap).
+FT                   Also highly similar to O06269|Rv3614c|MTCY07H7B.08
+FT                   hypothetical 19.8 KDA protein from Mycobacterium
+FT                   tuberculosis (184 aa), FASTA scores: opt: 559, E():
+FT                   3.4e-28, (54.35% identity in 173 aa overlap). A core
+FT                   mycobacterial gene; conserved in mycobacterial strains (See
+FT                   Marmiesse et al., 2004)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TGU5"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46696.1"
+FT                   /translation="MVDPPGNDDDHGDLDALDFSAAHTNEASPLDALDDYAPVQTDDAE
+FT                   GDLDALHALTERDEEPELELFTVTNPQGSVSVSTLMDGRIQHVELTDKATSMSEAQLAD
+FT                   EIFVIADLARQKARASQYTFMVENIGELTDEDAEGSALLREFVGMTLNLPTPEEAAAAE
+FT                   AEVFATRYDVDYTSRYKADD"
+FT   CDS             4343314..4345035
+FT                   /transl_table=11
+FT                   /gene="eccA1"
+FT                   /locus_tag="Rv3868"
+FT                   /product="ESX conserved component EccA1. ESX-1 type VII
+FT                   secretion system protein."
+FT                   /note="Rv3868, (MTV027.03), len: 573 aa. EccA1, esx
+FT                   conserved component, ESX-1 type VII secretion system
+FT                   protein. Member of the CbxX/CfqX family of hypothetical
+FT                   proteins; C-terminal end is highly similar to many e.g.
+FT                   P40118|CBXC_ALCEU|CBXXC|CFXXC CbxX protein (317 aa) FASTA
+FT                   scores: opt: 572, E(): 3e-24, (42.7% identity in 294 aa
+FT                   overlap); CAC48589 probable CBBX protein from Rhizobium
+FT                   meliloti (Sinorhizobium meliloti) plasmid pSymB (311 aa)
+FT                   FASTA scores: opt: 569, E(): 4.3e-24, (40.05% identity in
+FT                   292 aa overlap); P95648|CBBX_RHOSH CBBX protein from
+FT                   Rhodobacter sphaeroides (Rhodopseudomonas sphaeroides) (309
+FT                   aa), FASTA scores: opt: 559, E(): 1.5e-23, (41.4% identity
+FT                   in 290 aa overlap); etc. Equivalent to
+FT                   O33089|Y2G8_MYCLE|ML0055|MLCB628.18c hypothetical 62.3 KDA
+FT                   protein from Mycobacterium leprae (573 aa), FASTA scores:
+FT                   opt: 3330, E(): 3.9e-175, (89.2% identity in 573 aa
+FT                   overlap); and similar to Q9CD28|Y282_MYCLE|ML2537
+FT                   hypothetical 69.1 KDA protein from Mycobacterium leprae
+FT                   (640 aa), FASTA scores: opt: 943, E(): 2.4e-44, (37.5%
+FT                   identity in 571 aa overlap). Also similar to many proteins
+FT                   from Mycobacterium tuberculosis (strains H37Rv and CDC1551)
+FT                   e.g. O53687|Y282_MYCTU|Rv0282|MT0295|MTV035.10 hypothetical
+FT                   68.1 KDA protein (631 aa), FASTA scores: opt: 936, E():
+FT                   5.8e-44, (39.05% identity in 568 aa overlap). Contains
+FT                   PS00017 ATP/GTP-binding site motif A (P-loop)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TFH7"
+FT                   /inference="protein motif:PROSITE:PS00017"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46697.1"
+FT                   /translation="MTDRLASLFESAVSMLPMSEARSLDLFTEITNYDESACDAWIGRI
+FT                   RCGDTDRVTLFRAWYSRRNFGQLSGSVQISMSTLNARIAIGGLYGDITYPVTSPLAITM
+FT                   GFAACEAAQGNYADAMEALEAAPVAGSEHLVAWMKAVVYGAAERWTDVIDQVKSAGKWP
+FT                   DKFLAGAAGVAHGVAAANLALFTEAERRLTEANDSPAGEACARAIAWYLAMARRSQGNE
+FT                   SAAVALLEWLQTTHPEPKVAAALKDPSYRLKTTTAEQIASRADPWDPGSVVTDNSGRER
+FT                   LLAEAQAELDRQIGLTRVKNQIERYRAATLMARVRAAKGMKVAQPSKHMIFTGPPGTGK
+FT                   TTIARVVANILAGLGVIAEPKLVETSRKDFVAEYEGQSAVKTAKTIDQALGGVLFIDEA
+FT                   YALVQERDGRTDPFGQEALDTLLARMENDRDRLVVIIAGYSSDIDRLLETNEGLRSRFA
+FT                   TRIEFDTYSPEELLEIANVIAAADDSALTAEAAENFLQAAKQLEQRMLRGRRALDVAGN
+FT                   GRYARQLVEASEQCRDMRLAQVLDIDTLDEDRLREINGSDMAEAIAAVHAHLNMRE"
+FT   CDS             4345039..4346481
+FT                   /transl_table=11
+FT                   /gene="eccB1"
+FT                   /gene_synonym="snm6"
+FT                   /locus_tag="Rv3869"
+FT                   /product="ESX conserved component EccB1. ESX-1 type VII
+FT                   secretion system protein. Possible membrane protein."
+FT                   /note="Rv3869, (MTV027.04), len: 480 aa. EccB1, esx
+FT                   conserved component, ESX-1 type VII secretion system
+FT                   protein, possible membrane protein (has hydrophobic stretch
+FT                   near N-terminus), equivalent to O33088|ML0054|MLCB628.17c
+FT                   putative membrane protein from Mycobacterium leprae (481
+FT                   aa), FASTA scores: opt: 2489, E(): 8.3e-136, (75.75%
+FT                   identity in 478 aa overlap); and similar to others e.g.
+FT                   Q9Z5I3|ML1544|MLCB596.27 conserved membrane protein from
+FT                   Mycobacterium leprae (506 aa), FASTA scores: opt: 739, E():
+FT                   3.9e-35, (33.65% identity in 490 aa overlap). Also similar
+FT                   to hypothetical proteins from Mycobacterium tuberculosis
+FT                   e.g. O05449|Rv3895c|MTCY15F10.17 (495 aa), FASTA scores:
+FT                   opt: 795, E(): 2.3e-38, (35.8% identity in 486 aa overlap);
+FT                   O53933|Rv1782|MTV049.04 (506 aa), FASTA scores: opt:
+FT                   763,E(): 1.6e-36, (34.7% identity in 490 aa overlap);
+FT                   O06317|Rv3450c|MTCY13E12.03c (470 aa) FASTA scores: opt:
+FT                   717, E(): 6.7e-34, (32.55% identity in 479 aa overlap);
+FT                   etc. A core mycobacterial gene; conserved in mycobacterial
+FT                   strains (See Marmiesse et al., 2004)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TDT4"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46698.1"
+FT                   /translation="MGLRLTTKVQVSGWRFLLRRLEHAIVRRDTRMFDDPLQFYSRSIA
+FT                   LGIVVAVLILAGAALLAYFKPQGKLGGTSLFTDRATNQLYVLLSGQLHPVYNLTSARLV
+FT                   LGNPANPATVKSSELSKLPMGQTVGIPGAPYATPVSAGSTSIWTLCDTVARADSTSPVV
+FT                   QTAVIAMPLEIDASIDPLQSHEAVLVSYQGETWIVTTKGRHAIDLTDRALTSSMGIPVT
+FT                   ARPTPISEGMFNALPDMGPWQLPPIPAAGAPNSLGLPDDLVIGSVFQIHTDKGPQYYVV
+FT                   LPDGIAQVNATTAAALRATQAHGLVAPPAMVPSLVVRIAERVYPSPLPDEPLKIVSRPQ
+FT                   DPALCWSWQRSAGDQSPQSTVLSGRHLPISPSAMNMGIKQIHGTATVYLDGGKFVALQS
+FT                   PDPRYTESMYYIDPQGVRYGVPNAETAKSLGLSSPQNAPWEIVRLLVDGPVLSKDAALL
+FT                   EHDTLPADPSPRKVPAGASGAP"
+FT   CDS             4346481..4348724
+FT                   /transl_table=11
+FT                   /gene="eccCa1"
+FT                   /gene_synonym="snm1"
+FT                   /locus_tag="Rv3870"
+FT                   /product="ESX conserved component EccCa1. ESX-1 type VII
+FT                   secretion system protein. Possible transmembrane protein."
+FT                   /note="Rv3870, (MTV027.05), len: 747 aa. EccCa1, esx
+FT                   conserved component, ESX-1 type VII secretion system
+FT                   protein, possible transmembrane protein, equivalent to
+FT                   O33087|ML0053|MLCB628.16c putative membrane protein from
+FT                   Mycobacterium leprae (744 aa), FASTA scores: opt: 4333,E():
+FT                   0, (85.4% identity in 746 aa overlap); and similar to
+FT                   N-terminal end of others e.g. Q9CD30|ML2535 hypothetical
+FT                   protein from Mycobacterium leprae (1329 aa), FASTA scores:
+FT                   opt: 1003, E(): 1e-52, (33.65% identity in 725 aa overlap);
+FT                   O86653|SC3C3.20c ATP/GTP binding protein from Streptomyces
+FT                   coelicolor (1321 aa), FASTA scores: opt: 1078, E():
+FT                   3e-57,(35.4% identity in 774 aa overlap); P71068|YUKA YUKA
+FT                   protein from Bacillus subtilis (1207 aa) FASTA scores: opt:
+FT                   529, E(): 4.3e-24, (26.1% identity in 636 aa overlap);
+FT                   Q9KE81|BH0975 hypothetical protein from Bacillus halodurans
+FT                   (1489 aa), FASTA scores: opt: 455, E(): 1.5e-19, (27.1%
+FT                   identity in 734 aa overlap); etc. Also similar to
+FT                   N-terminal end of hypothetical proteins from Mycobacterium
+FT                   tuberculosis e.g. O53689|Rv0284|MTV035.12 (1330 aa), FASTA
+FT                   scores: opt: 982, E(): 1.9e-51, (33.8% identity in 719 aa
+FT                   overlap); O06264|Rv3447c|MTCY77.19c (1236 aa), FASTA
+FT                   scores: opt: 761, E(): 4.1e-38, (38.2% identity in 746 aa
+FT                   overlap); O53935|Rv1784|MTV049.06 (932 aa), FASTA scores:
+FT                   opt: 547, E(): 2.8e-25, (36.25% identity in 276 aa
+FT                   overlap). Contains PS00017 ATP/GTP-binding site motif A
+FT                   (P-loop). Note some similarity (with hypothetical proteins
+FT                   from Mycobacterium tuberculosis and P71068|YUKA) continues
+FT                   in downstream ORF MTV027.06."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TE12"
+FT                   /inference="protein motif:PROSITE:PS00017"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46699.1"
+FT                   /translation="MTTKKFTPTITRGPRLTPGEISLTPPDDLGIDIPPSGVQKILPYV
+FT                   MGGAMLGMIAIMVAGGTRQLSPYMLMMPLMMIVMMVGGLAGSTGGGGKKVPEINADRKE
+FT                   YLRYLAGLRTRVTSSATSQVAFFSYHAPHPEDLLSIVGTQRQWSRPANADFYAATRIGI
+FT                   GDQPAVDRLLKPAVGGELAAASAAPQPFLEPVSHMWVVKFLRTHGLIHDCPKLLQLRTF
+FT                   PTIAIGGDLAGAAGLMTAMICHLAVFHPPDLLQIRVLTEEPDDPDWSWLKWLPHVQHQT
+FT                   ETDAAGSTRLIFTRQEGLSDLAARGPHAPDSLPGGPYVVVVDLTGGKAGFPPDGRAGVT
+FT                   VITLGNHRGSAYRIRVHEDGTADDRLPNQSFRQVTSVTDRMSPQQASRIARKLAGWSIT
+FT                   GTILDKTSRVQKKVATDWHQLVGAQSVEEITPSRWRMYTDTDRDRLKIPFGHELKTGNV
+FT                   MYLDIKEGAEFGAGPHGMLIGTTGSGKSEFLRTLILSLVAMTHPDQVNLLLTDFKGGST
+FT                   FLGMEKLPHTAAVVTNMAEEAELVSRMGEVLTGELDRRQSILRQAGMKVGAAGALSGVA
+FT                   EYEKYRERGADLPPLPTLFVVVDEFAELLQSHPDFIGLFDRICRVGRSLRVHLLLATQS
+FT                   LQTGGVRIDKLEPNLTYRIALRTTSSHESKAVIGTPEAQYITNKESGVGFLRVGMEDPV
+FT                   KFSTFYISGPYMPPAAGVETNGEAGGPGQQTTRQAARIHRFTAAPVLEEAPTP"
+FT   repeat_region   4348721..4348773
+FT                   /note="53 bp Mycobacterial Interspersed Repetitive
+FT                   Unit,Class II"
+FT   repeat_region   4348774..4348826
+FT                   /note="53 bp Mycobacterial Interspersed Repetitive
+FT                   Unit,Class II"
+FT   CDS             4348827..4350602
+FT                   /transl_table=11
+FT                   /gene="eccCb1"
+FT                   /gene_synonym="snm2"
+FT                   /locus_tag="Rv3871"
+FT                   /product="ESX conserved component EccCb1. ESX-1 type VII
+FT                   secretion system protein."
+FT                   /note="Rv3871, (MTV027.06), len: 591 aa. EccCb1, esx
+FT                   conserved component, ESX-1 type VII secretion system
+FT                   protein, equivalent to Q9CDD7|ML0052 hypothetical protein
+FT                   from Mycobacterium leprae (597 aa) FASTA scores: opt:
+FT                   3341,E(): 9.8e-192, (80.85% identity in 596 aa overlap);
+FT                   and O33086|MLCB628.15c hypothetical protein from
+FT                   Mycobacterium leprae (597 aa), FASTA scores: opt: 3329,
+FT                   E(): 5.1e-191,(80.55% identity in 596 aa overlap). And
+FT                   similar to C-terminal end of others e.g.
+FT                   Q9Z5I2|ML1543|MLCB596.28 possible SPOIIIE-family membrane
+FT                   protein from Mycobacterium leprae (1345 aa), FASTA scores:
+FT                   opt: 601, E(): 5.6e-28,(32.3% identity in 613 aa overlap);
+FT                   O86653|SC3C3.20c ATP/GTP binding protein from Streptomyces
+FT                   coelicolor (1321 aa), FASTA scores: opt: 977, E(): 2.1e-50,
+FT                   (35.15% identity in 583 aa overlap); Q9L0T6|SCD35.15c
+FT                   putative cell division-related protein from Streptomyces
+FT                   coelicolor (1525 aa), FASTA scores: opt: 414, E(): 9e-17,
+FT                   (27.6% identity in 424 aa overlap);P71068|YUKA YUKA protein
+FT                   from Bacillus subtilis (1207 aa), FASTA scores: opt: 343,
+FT                   E(): 1.3e-12,(25.8% identity in 395 aa overlap); etc. And
+FT                   similar to to C-terminal end of hypothetical proteins from
+FT                   Mycobacterium tuberculosis e.g. O06264|Rv3447c|MTCY77.19c
+FT                   (1236 aa) FASTA scores: opt: 845, E(): 1.5e-42, (35.3%
+FT                   identity in 586 aa overlap); O53689|Rv0284|MTV035.12 (1330
+FT                   aa) FASTA scores: opt: 646, E(): 1.2e-30, (33.35% identity
+FT                   in 606 aa overlap); O53935|Rv1784|MTV049.06 (932 aa) FASTA
+FT                   scores: opt: 589, E(): 2.1e-27, (33.1% identity in 619 aa
+FT                   overlap); etc. Contains 2 X PS00017 ATP/GTP-binding site
+FT                   motif A (P-loop). Note some similarity (with hypothetical
+FT                   proteins from Mycobacterium tuberculosis and P71068|YUKA)
+FT                   continues in upstream ORF MTV027.05."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TGZ9"
+FT                   /inference="protein motif:PROSITE:PS00017"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46700.1"
+FT                   /translation="MTAEPEVRTLREVVLDQLGTAESRAYKMWLPPLTNPVPLNELIAR
+FT                   DRRQPLRFALGIMDEPRRHLQDVWGVDVSGAGGNIGIGGAPQTGKSTLLQTMVMSAAAT
+FT                   HSPRNVQFYCIDLGGGGLIYLENLPHVGGVANRSEPDKVNRVVAEMQAVMRQRETTFKE
+FT                   HRVGSIGMYRQLRDDPSQPVASDPYGDVFLIIDGWPGFVGEFPDLEGQVQDLAAQGLAF
+FT                   GVHVIISTPRWTELKSRVRDYLGTKIEFRLGDVNETQIDRITREIPANRPGRAVSMEKH
+FT                   HLMIGVPRFDGVHSADNLVEAITAGVTQIASQHTEQAPPVRVLPERIHLHELDPNPPGP
+FT                   ESDYRTRWEIPIGLRETDLTPAHCHMHTNPHLLIFGAAKSGKTTIAHAIARAICARNSP
+FT                   QQVRFMLADYRSGLLDAVPDTHLLGAGAINRNSASLDEAVQALAVNLKKRLPPTDLTTA
+FT                   QLRSRSWWSGFDVVLLVDDWHMIVGAAGGMPPMAPLAPLLPAAADIGLHIIVTCQMSQA
+FT                   YKATMDKFVGAAFGSGAPTMFLSGEKQEFPSSEFKVKRRPPGQAFLVSPDGKEVIQAPY
+FT                   IEPPEEVFAAPPSAG"
+FT   CDS             4350745..4351044
+FT                   /transl_table=11
+FT                   /gene="PE35"
+FT                   /locus_tag="Rv3872"
+FT                   /product="PE family-related protein PE35"
+FT                   /note="Rv3872, (MTV027.07), len: 99 aa. PE35, Some
+FT                   similarity to Mycobacterium tuberculosis conserved PE
+FT                   family proteins (see Brennan & Delogu 2002), e.g.
+FT                   O69713|Rv3746c|MTV025.094c (111 aa), FASTA scores: opt:
+FT                   306, E(): 5.5e-13, (50.5% identity in 99 aa overlap).
+FT                   Equivalent to AAK48354 from Mycobacterium tuberculosis
+FT                   strain CDC1551 (112 aa) but shorter 14 aa."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TGV1"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46701.1"
+FT                   /translation="MEKMSHDPIAADIGTQVSDNALHGVTAGSTALTSVTGLVPAGADE
+FT                   VSAQAATAFTSEGIQLLASNASAQDQLHRAGEAVQDVARTYSQIDDGAAGVFAE"
+FT   CDS             4351075..4352181
+FT                   /transl_table=11
+FT                   /gene="PPE68"
+FT                   /locus_tag="Rv3873"
+FT                   /product="PPE family protein PPE68"
+FT                   /note="Rv3873, (MTV027.08), len: 368 aa. PPE68, Member of
+FT                   the Mycobacterium tuberculosis PPE family, highly similar
+FT                   to many e.g. O33085|ML0051|MLCB628.14c from Mycobacterium
+FT                   leprae (302 aa), FASTA scores: opt: 656, E():
+FT                   2.8e-24,(46.2% identity in 288 aa overlap); and
+FT                   O53691|Rv0286|MTV035.14 (513 aa), FASTA scores: opt:
+FT                   566,E(): 7.8e-20, (35.25% identity in 363 aa overlap). A
+FT                   core mycobacterial gene; conserved in mycobacterial strains
+FT                   (See Marmiesse et al., 2004). Predicted possible vaccine
+FT                   candidate (See Zvi et al., 2008)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TFI2"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46702.1"
+FT                   /translation="MLWHAMPPELNTARLMAGAGPAPMLAAAAGWQTLSAALDAQAVEL
+FT                   TARLNSLGEAWTGGGSDKALAAATPMVVWLQTASTQAKTRAMQATAQAAAYTQAMATTP
+FT                   SLPEIAANHITQAVLTATNFFGINTIPIALTEMDYFIRMWNQAALAMEVYQAETAVNTL
+FT                   FEKLEPMASILDPGASQSTTNPIFGMPSPGSSTPVGQLPPAATQTLGQLGEMSGPMQQL
+FT                   TQPLQQVTSLFSQVGGTGGGNPADEEAAQMGLLGTSPLSNHPLAGGSGPSAGAGLLRAE
+FT                   SLPGAGGSLTRTPLMSQLIEKPVAPSVMPAAAAGSSATGGAAPVGAGAMGQGAQSGGST
+FT                   RPGLVAPAPLAQEREEDDEDDWDEEDDW"
+FT   CDS             4352274..4352576
+FT                   /transl_table=11
+FT                   /gene="esxB"
+FT                   /gene_synonym="lhp, cfp10"
+FT                   /locus_tag="Rv3874"
+FT                   /product="10 kDa culture filtrate antigen EsxB (LHP)
+FT                   (CFP10)"
+FT                   /note="Rv3874, (MT3988, MTV027.09), len: 100 aa. EsxB, 10
+FT                   KDA culture filtrate antigen (see citations
+FT                   below,especially first), highly similar to
+FT                   O33084|CF10_MYCLE|ML0050|MLCB628.13c 10 KDA culture
+FT                   filtrate antigen CFP10 homolog from Mycobacterium leprae
+FT                   (99 aa), FASTA scores: opt: 237, E(): 2.4e-08, (39.4%
+FT                   identity in 99 aa overlap). Also similar to
+FT                   O05440|ES6D_MYCTU|Rv3905c|MT4024|MTCY15F10.06 putative
+FT                   ESAT-6 like protein 13 from Mycobacterium tuberculosis (103
+FT                   aa) FASTA scores: opt: 126, E(): 0.18, (23.1% identity in
+FT                   91 aa overlap); and shows some similarity with other
+FT                   proteins from Mycobacterium tuberculosis. Contains probable
+FT                   coiled-coil from aa 49-93. Belongs to the ESAT6 family.
+FT                   Note that previously known as lhp (alternate gene name:
+FT                   cfp10). A core mycobacterial gene; conserved in
+FT                   mycobacterial strains (See Marmiesse et al., 2004)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TDT9"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46703.1"
+FT                   /translation="MAEMKTDAATLAQEAGNFERISGDLKTQIDQVESTAGSLQGQWRG
+FT                   AAGTAAQAAVVRFQEAANKQKQELDEISTNIRQAGVQYSRADEEQQQALSSQMGF"
+FT   CDS             4352609..4352896
+FT                   /transl_table=11
+FT                   /gene="esxA"
+FT                   /gene_synonym="esat-6"
+FT                   /locus_tag="Rv3875"
+FT                   /product="6 kDa early secretory antigenic target EsxA
+FT                   (ESAT-6)"
+FT                   /note="Rv3875, (MT3989, MTV027.10), len: 95 aa. EsxA, early
+FT                   secretory antigenic target (see citations below), identical
+FT                   to Q57165|O84901|ESAT6 early secretory antigenic target
+FT                   from Mycobacterium bovis (94 aa), FASTA scores: opt:
+FT                   596,E(): 4.6e-33, (100.0% identity in 94 aa overlap). Also
+FT                   similar to
+FT                   Q50206|ESA6_MYCLE|ESAT6|ESX|L45|ML0049|MLCB628.12c 6 KDA
+FT                   early secretory antigenic target homolog (ESAT-6-like
+FT                   protein) (L-ESAT) from Mycobacterium leprae (95 aa), FASTA
+FT                   scores: opt: 236, E(): 3.3e-09, (36.25% identity in 91 aa
+FT                   overlap); and weak similarity with others proteins
+FT                   ESAT-like from Mycobacterium leprae. Also some similarity
+FT                   with O53266|ES69_MYCTU|Rv3019c|MT3104|MTV012.33c putative
+FT                   secreted ESAT-6 like protein 9 from Mycobacterium
+FT                   tuberculosis (96 aa), FASTA scores: opt: 131, E():
+FT                   0.03,(26.15% identity in 88 aa overlap); and other
+FT                   ESAT-like protein. Contains probable coiled-coil from 56 to
+FT                   92 aa. Belongs to the ESAT6 family. Note that previously
+FT                   known as esat-6. A core mycobacterial gene; conserved in
+FT                   mycobacterial strains (See Marmiesse et al., 2004).
+FT                   Predicted possible vaccine candidate (See Zvi et al.,2008).
+FT                   EspD|Rv3614c expression but not secretion is required for
+FT                   EsxA|Rv3875 secretion (See Chen et al.,2012)."
+FT                   /db_xref="InterPro:IPR010310"
+FT                   /db_xref="UniProtKB/TrEMBL:Q540D8"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46704.1"
+FT                   /translation="MTEQQWNFAGIEAAASAIQGNVTSIHSLLDEGKQSLTKLAAAWGG
+FT                   SGSEAYQGVQQKWDATATELNNALQNLARTISEAGQAMASTEGNVTGMFA"
+FT   CDS             4353010..4355010
+FT                   /transl_table=11
+FT                   /gene="espI"
+FT                   /gene_synonym="snm3"
+FT                   /locus_tag="Rv3876"
+FT                   /product="ESX-1 secretion-associated protein EspI.
+FT                   Conserved proline and alanine rich protein."
+FT                   /note="Rv3876, (MTV027.11), len: 666 aa. EspI, ESX-1
+FT                   secretion-associated protein, conserved pro-, ala-rich
+FT                   protein, similar to several proteins from Mycobacterium
+FT                   leprae e.g. Q9CDD8|ML0048 hypothetical protein (586
+FT                   aa),FASTA scores: opt: 1682, E(): 2.1e-45, (50.75% identity
+FT                   in 672 aa overlap); O33082|MLCB628.11c hypothetical 52.0
+FT                   KDA protein (478 aa), FASTA scores: opt: 1588, E():
+FT                   1.5e-42,(53.5% identity in 542 aa overlap) (also has a
+FT                   proline rich N-terminus); etc. Also similar to other
+FT                   proteins from Mycobacterium tuberculosis, especially in
+FT                   C-terminus, e.g. O06396|Rv0530|MTCY25D10.09 (405 aa), FASTA
+FT                   scores: opt: 670, E(): 2.5e-14, (34.85% identity in 396 aa
+FT                   overlap) (also has Pro-rich N-terminus); etc. Note that
+FT                   N-terminus is repetitive and highly Proline rich."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TH05"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46705.1"
+FT                   /translation="MAADYDKLFRPHEGMEAPDDMAAQPFFDPSASFPPAPASANLPKP
+FT                   NGQTPPPTSDDLSERFVSAPPPPPPPPPPPPPTPMPIAAGEPPSPEPAASKPPTPPMPI
+FT                   AGPEPAPPKPPTPPMPIAGPEPAPPKPPTPPMPIAGPAPTPTESQLAPPRPPTPQTPTG
+FT                   APQQPESPAPHVPSHGPHQPRRTAPAPPWAKMPIGEPPPAPSRPSASPAEPPTRPAPQH
+FT                   SRRARRGHRYRTDTERNVGKVATGPSIQARLRAEEASGAQLAPGTEPSPAPLGQPRSYL
+FT                   APPTRPAPTEPPPSPSPQRNSGRRAERRVHPDLAAQHAAAQPDSITAATTGGRRRKRAA
+FT                   PDLDATQKSLRPAAKGPKVKKVKPQKPKATKPPKVVSQRGWRHWVHALTRINLGLSPDE
+FT                   KYELDLHARVRRNPRGSYQIAVVGLKGGAGKTTLTAALGSTLAQVRADRILALDADPGA
+FT                   GNLADRVGRQSGATIADVLAEKELSHYNDIRAHTSVNAVNLEVLPAPEYSSAQRALSDA
+FT                   DWHFIADPASRFYNLVLADCGAGFFDPLTRGVLSTVSGVVVVASVSIDGAQQASVALDW
+FT                   LRNNGYQDLASRACVVINHIMPGEPNVAVKDLVRHFEQQVQPGRVVVMPWDRHIAAGTE
+FT                   ISLDLLDPIYKRKVLELAAALSDDFERAGRR"
+FT   repeat_region   4353280..4353330
+FT                   /note="51 bp imperfect direct repeat
+FT                   1,GAACCGGCCGCATCTAAACCACCCACACCCCCCATGCCCATCGCCGGACCC"
+FT   repeat_region   4353331..4353381
+FT                   /note="51 bp imperfect direct repeat
+FT                   2,GAACCGGCCCCACCCAAACCACCCACACCCCCCATGCCCATCGCCGGACCC"
+FT   repeat_region   4353382..4353432
+FT                   /note="51 bp imperfect direct repeat
+FT                   3,GAACCGGCCCCACCCAAACCACCCACACCTCCGATGCCCATCGCCGGACCT"
+FT   CDS             4355007..4356542
+FT                   /transl_table=11
+FT                   /gene="eccD1"
+FT                   /gene_synonym="snm4"
+FT                   /locus_tag="Rv3877"
+FT                   /product="ESX conserved component EccD1. ESX-1 type VII
+FT                   secretion system protein. Probable transmembrane protein."
+FT                   /note="Rv3877, (MTV027.12), len: 511 aa. EccD1, esx
+FT                   conserved component, ESX-1 type VII secretion system
+FT                   protein, probable transmembrane protein, equivalent to
+FT                   Q9CDD9|ML0047 putative membrane protein from Mycobacterium
+FT                   leprae (512 aa), FASTA scores: opt: 2496, E():
+FT                   2.8e-140,(74.0% identity in 512 aa overlap); and highly
+FT                   similar, but longer 32 aa, to O33081|MLCB628.10c
+FT                   hypothetical 51.4 KDA protein from Mycobacterium leprae
+FT                   (480 aa), FASTA scores: opt: 2346, E(): 2e-131, (74.15%
+FT                   identity in 480 aa overlap). Shows also similarity with
+FT                   other membrane proteins from Mycobacterium leprae e.g.
+FT                   Q9CBV2|ML1539 probable membrane protein (503 aa), FASTA
+FT                   scores: opt: 318,E(): 2e-11, (22.7% identity in 520 aa
+FT                   overlap). Also similar to various proteins from
+FT                   Mycobacterium tuberculosis e.g. O53944|Rv1795|MTV049.17
+FT                   putative membrane protein (503 aa), FASTA scores: opt: 391,
+FT                   E(): 9.4e-16, (24.45% identity in 523 aa overlap);
+FT                   O86362|Rv0290|MTV035.18 hypothetical 47.9 KDA protein (472
+FT                   aa), FASTA scores: opt: 332, E(): 2.8e-12, (28.1% identity
+FT                   in 509 aa overlap); O05457|Rv3887c|MTCY15F10.25
+FT                   hypothetical 53.2 KDA protein (509 aa), FASTA scores: opt:
+FT                   167, E(): 0.017, (24.0% identity in 517 aa overlap); etc.
+FT                   Equivalent to AAK48359 from Mycobacterium tuberculosis
+FT                   strain CDC1551 (479 aa) but longer 32 aa. A core
+FT                   mycobacterial gene; conserved in mycobacterial strains (See
+FT                   Marmiesse et al., 2004)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TGV6"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46706.1"
+FT                   /translation="MSAPAVAAGPTAAGATAARPATTRVTILTGRRMTDLVLPAAVPME
+FT                   TYIDDTVAVLSEVLEDTPADVLGGFDFTAQGVWAFARPGSPPLKLDQSLDDAGVVDGSL
+FT                   LTLVSVSRTERYRPLVEDVIDAIAVLDESPEFDRTALNRFVGAAIPLLTAPVIGMAMRA
+FT                   WWETGRSLWWPLAIGILGIAVLVGSFVANRFYQSGHLAECLLVTTYLLIATAAALAVPL
+FT                   PRGVNSLGAPQVAGAATAVLFLTLMTRGGPRKRHELASFAVITAIAVIAAAAAFGYGYQ
+FT                   DWVPAGGIAFGLFIVTNAAKLTVAVARIALPPIPVPGETVDNEELLDPVATPEATSEET
+FT                   PTWQAIIASVPASAVRLTERSKLAKQLLIGYVTSGTLILAAGAIAVVVRGHFFVHSLVV
+FT                   AGLITTVCGFRSRLYAERWCAWALLAATVAIPTGLTAKLIIWYPHYAWLLLSVYLTVAL
+FT                   VALVVVGSMAHVRRVSPVVKRTLELIDGAMIAAIIPMLLWITGVYDTVRNIRF"
+FT   CDS             4356693..4357535
+FT                   /transl_table=11
+FT                   /gene="espJ"
+FT                   /gene_synonym="TB27.4"
+FT                   /locus_tag="Rv3878"
+FT                   /product="ESX-1 secretion-associated protein EspJ.
+FT                   Conserved alanine rich protein."
+FT                   /note="Rv3878, (MTV027.13), len: 280 aa. EspJ, ESX-1
+FT                   secretion-associated protein, conserved ala-rich protein.
+FT                   Predicted to be an outer membrane protein (See Song et
+FT                   al.,2008)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TFI6"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46707.1"
+FT                   /translation="MAEPLAVDPTGLSAAAAKLAGLVFPQPPAPIAVSGTDSVVAAINE
+FT                   TMPSIESLVSDGLPGVKAALTRTASNMNAAADVYAKTDQSLGTSLSQYAFGSSGEGLAG
+FT                   VASVGGQPSQATQLLSTPVSQVTTQLGETAAELAPRVVATVPQLVQLAPHAVQMSQNAS
+FT                   PIAQTISQTAQQAAQSAQGGSGPMPAQLASAEKPATEQAEPVHEVTNDDQGDQGDVQPA
+FT                   EVVAAARDEGAGASPGQQPGGGVPAQAMDTGAGARPAASPLAAPVDPSTPAPSTTTTL"
+FT   CDS             complement(4357593..4359782)
+FT                   /transl_table=11
+FT                   /gene="espK"
+FT                   /locus_tag="Rv3879c"
+FT                   /product="ESX-1 secretion-associated protein EspK. Alanine
+FT                   and proline rich protein."
+FT                   /note="Rv3879c, (MTV027.14c), len: 729 aa. EspK, ESX-1
+FT                   secretion-associated protein, ala- and pro-rich protein
+FT                   (N-terminal end is repetitive and highly Proline-rich).
+FT                   There may be an unknown protein Orf14 encoded in the
+FT                   opposite orientation, within rv3879c (See Ahmad et
+FT                   al.,1999; Daugelat et al., 2003)."
+FT                   /db_xref="UniProtKB/TrEMBL:L0TDU5"
+FT                   /experiment="EXISTENCE: identified in proteomics study"
+FT                   /protein_id="CCP46708.1"
+FT                   /translation="MSITRPTGSYARQMLDPGGWVEADEDTFYDRAQEYSQVLQRVTDV
+FT                   LDTCRQQKGHVFEGGLWSGGAANAANGALGANINQLMTLQDYLATVITWHRHIAGLIEQ
+FT                   AKSDIGNNVDGAQREIDILENDPSLDADERHTAINSLVTATHGANVSLVAETAERVLES
+FT                   KNWKPPKNALEDLLQQKSPPPPDVPTLVVPSPGTPGTPGTPITPGTPITPGTPITPIPG
+FT                   APVTPITPTPGTPVTPVTPGKPVTPVTPVKPGTPGEPTPITPVTPPVAPATPATPATPV
+FT                   TPAPAPHPQPAPAPAPSPGPQPVTPATPGPSGPATPGTPGGEPAPHVKPAALAEQPGVP
+FT                   GQHAGGGTQSGPAHADESAASVTPAAASGVPGARAAAAAPSGTAVGAGARSSVGTAAAS
+FT                   GAGSHAATGRAPVATSDKAAAPSTRAASARTAPPARPPSTDHIDKPDRSESADDGTPVS
+FT                   MIPVSAARAARDAATAAASARQRGRGDALRLARRIAAALNASDNNAGDYGFFWITAVTT
+FT                   DGSIVVANSYGLAYIPDGMELPNKVYLASADHAIPVDEIARCATYPVLAVQAWAAFHDM
+FT                   TLRAVIGTAEQLASSDPGVAKIVLEPDDIPESGKMTGRSRLEVVDPSAAAQLADTTDQR
+FT                   LLDLLPPAPVDVNPPGDERHMLWFELMKPMTSTATGREAAHLRAFRAYAAHSQEIALHQ
+FT                   AHTATDAAVQRVAVADWLYWQYVTGLLDRALAAAC"
+//

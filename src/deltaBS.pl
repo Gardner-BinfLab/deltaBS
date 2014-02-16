@@ -103,7 +103,7 @@ if (defined($post)){
 system("mkdir -p $outdir") == 0 or die "Couldn't create $outdir: $!";
 
 #generate fasta files, get annotation hash refs
-print STDERR "Generating proteome fsta files in $tmp_dir..." if $verbose;
+print STDERR "Generating proteome fasta files in $tmp_dir..." if $verbose;
 my $fasta1 = "$tmp_dir/DELTABS_embl1.fasta";
 my $fasta2 = "$tmp_dir/DELTABS_embl2.fasta";
 #my $fasta1 = "tmp/DBS.8392/DELTABS_embl1.fasta";
@@ -113,7 +113,7 @@ my $embl2_genes = &write_CDS_fasta($embl2,$fasta2);
 print STDERR "done.\n" if $verbose;
 
 ######################################################################
-#run hmmscan on these files with Pfam HMMs:
+#run hmmscan on the proteomes with Pfam HMMs:
 
 if(not defined($pfamannot1)){
     $pfamannot1 = "$embl1-pfam_hmmscan1.tbl";
@@ -122,7 +122,7 @@ if(not defined($pfamannot1)){
 }
 
 if(not defined($pfamannot2)){
-    $pfamannot2 = "$embl1-pfam_hmmscan1.tbl";
+    $pfamannot2 = "$embl2-pfam_hmmscan1.tbl";
     print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs..." if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
 }

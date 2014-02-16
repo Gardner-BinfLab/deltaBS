@@ -1,0 +1,254 @@
+ID   CP000480; SV 1; circular; genomic DNA; STD; PRO; 6988209 BP.
+XX
+AC   CP000480;
+XX
+PR   Project:92;
+XX
+DT   21-NOV-2006 (Rel. 89, Created)
+DT   22-NOV-2011 (Rel. 110, Last updated, Version 5)
+XX
+DE   Mycobacterium smegmatis str. MC2 155, complete genome.
+XX
+KW   .
+XX
+OS   Mycobacterium smegmatis str. MC2 155
+OC   Bacteria; Actinobacteria; Actinobacteridae; Actinomycetales;
+OC   Corynebacterineae; Mycobacteriaceae; Mycobacterium.
+XX
+RN   [1]
+RP   1-6988209
+RA   Fleischmann R.D., Dodson R.J., Haft D.H., Merkel J.S., Nelson W.C.,
+RA   Fraser C.M.;
+RT   ;
+RL   Submitted (19-OCT-2006) to the INSDC.
+RL   The Institute for Genomic Research, 9712 Medical Center Dr, Rockville, MD
+RL   20850, USA
+XX
+DR   GOA; A4ZHR8.
+DR   GOA; A4ZHT6.
+DR   GR; CP000480_GR.
+DR   InterPro; IPR000043; Adenosylhomocysteinase.
+DR   InterPro; IPR015878; Ado_hCys_hydrolase_NAD-bd.
+DR   InterPro; IPR017813; Mycothiol_AcTrfase.
+DR   InterPro; IPR020082; S-Ado-L-homoCys_hydrolase_CS.
+DR   RFAM; RF00001; 5S_rRNA.
+DR   RFAM; RF00005; tRNA.
+DR   RFAM; RF00010; RNaseP_bact_a.
+DR   RFAM; RF00023; tmRNA.
+DR   RFAM; RF00059; TPP.
+DR   RFAM; RF00080; yybP-ykoY.
+DR   RFAM; RF00169; Bacteria_small_SRP.
+DR   RFAM; RF00174; Cobalamin.
+DR   RFAM; RF00177; SSU_rRNA_bacteria.
+DR   RFAM; RF00379; ydaO-yuaA.
+DR   RFAM; RF00380; ykoK.
+DR   RFAM; RF00504; Glycine.
+DR   RFAM; RF00634; SAM-IV.
+DR   RFAM; RF01066; 6C.
+DR   RFAM; RF01118; PK-G12rRNA.
+DR   RFAM; RF01482; AdoCbl_riboswitch.
+DR   RFAM; RF01497; ALIL.
+DR   RFAM; RF01688; Actino-pnp.
+DR   RFAM; RF01746; mraW.
+DR   RFAM; RF01763; ykkC-III.
+DR   RFAM; RF01781; ASdes.
+DR   RFAM; RF01791; F6.
+DR   RFAM; RF01852; tRNA-Sec.
+DR   SILVA-LSU; CP000480.
+DR   SILVA-SSU; CP000480.
+DR   StrainInfo; 117498; 0.
+DR   UniProtKB/Swiss-Prot; A4ZHR8; SAHH_MYCS2.
+DR   UniProtKB/Swiss-Prot; A4ZHT6; MSHD_MYCS2.
+XX
+CC   Source DNA/bacteria is available from William R. Jacobs, Jr., Ph.D.
+CC   email: jacobsw@hhmi.org.
+XX
+FH   Key             Location/Qualifiers
+FH
+FT   gene            complement(811187..811729)
+FT                   /locus_tag="MSMEG_0723"
+FT   CDS             complement(811187..811729)
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0723"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QQE1"
+FT                   /protein_id="ABK71164.1"
+FT                   /translation="MFPKCPQTPIIQAGLLAISAMSLQCGLGTPDDGSRFGDGCGEFRK
+FT                   TDELQESAAPNEQWQGSASKAYDWWWAQVVRQRERAQKLAQADEMMQEVIRSQAEQVSQTRQ
+FT                   LLDIYSIALAAMIVPATIAMYTPYGQPASVAIQAGAVAGTVPLATGSMLAMAALANANA
+FT                   AKVLQATAHYTEVAGEA"
+FT   gene            76535..77383
+FT                   /locus_tag="MSMEG_0057"
+FT   CDS             76535..77383
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0057"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNI7"
+FT                   /protein_id="ABK75056.1"
+FT                   /translation="MTAPFTAETGDAHIDDVVGVEVTIDGMLVIADKLGLTDFPPSMGI
+FT                   RLNIPQPDLRKVVWEQVERDLSAQGVLDVYGNPHPEVAAMVDTLARADRTLECRWWRRD
+FT                   AGGKMIRFVVCRKGGRHVVAARDNDLLVLQRWWWVAPQIGLAGMVMTVLGEGSPANVEPLTG
+FT                   VADRLAQCRTAEELTGYGIPPTSARAYASIISEPDGWVEIVANERHPGGTTSQVDVAAG
+FT                   VLDAKQGRIVSIPRRVNGELYGSFLSGTKDNLERALEGLVEFLPSKTWFDKTDADNAYQ
+FT                   H"
+FT   gene            77918..79642
+FT                   /locus_tag="MSMEG_0059"
+FT   CDS             77918..79642
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0059"
+FT                   /product="ATPase, AAA family protein"
+FT                   /note="identified by match to protein family HMM PF00004"
+FT                   /db_xref="GOA:A0QNI9"
+FT                   /db_xref="InterPro:IPR000641"
+FT                   /db_xref="InterPro:IPR003593"
+FT                   /db_xref="InterPro:IPR003959"
+FT                   /db_xref="InterPro:IPR023835"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNI9"
+FT                   /protein_id="ABK74506.1"
+FT                   /translation="MVNHLAGMFGSAVGMMSNSRARALEIFTEITNYDESACDAWVGRI
+FT                   GCGDTDRVTLFRAWYSRSNFGQLAGAAEISMNGVGARIPIGGIYSRDITYPINSPLAIT
+FT                   MGFAVHEASEGNYTDAMEALEDAPAAGSEHLVSWVRAVIYGAGQRWTEVIDQVRGAERW
+FT                   PDKFLAAAAGVAHGVAAANLGLFTEADRRLTEANDTPVAQACAPVIAWYLAMARRSQGN
+FT                   EESAQVLLEWLQANFPEPKVTAALRDPAYRLETTTAEKIAARSDPWDPSSVVADTSARD
+FT                   KLLVEAQAELDRQIGLGRVKEQIEAYRAATQMARIRAARGMKVAQTSKHMIFAGPPGTG
+FT                   KTTIARVVANILAGLGVIAEPKLIETSRKDFVAEYEGQSAVKTSKTIDRALGGVLFIDE
+FT                   AYTLVQERNGQTDPFGAEALDTLLAWWWRMENDRDRLVVIIAGYSNDIDRLLEVNDGLRSRF
+FT                   ATRIEFDSYSPDEIVEISKVIATANDSRLDDTAAKRVLEAATTLSQRSLNGKPALDIAG
+FT                   NGRYARQLVEAGEQNRDMRLARSLDFDSLGVDQLSEINGDDMAAAIASVHSRLNIGE"
+FT   gene            81089..83317
+FT                   /locus_tag="MSMEG_0061"
+FT   CDS             81089..83317
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0061"
+FT                   /product="ftsk/spoiiie family protein"
+FT                   /note="identified by match to protein family HMM PF01580"
+FT                   /db_xref="GOA:A0QNJ1"
+FT                   /db_xref="InterPro:IPR002543"
+FT                   /db_xref="InterPro:IPR023836"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNJ1"
+FT                   /protein_id="ABK74495.1"
+FT                   /translation="MTTKKFTPTIKRGPRLTPGEINVAPPDDLGIDIPPSGMQKALPWV
+FT                   MGGCMLGMIAIMVFTGVRQLSPYMLMMPLMMIMGTVGFMAGGGSGGKKVPEINADRKEY
+FT                   LRYLAGLRTRVTSSASAQVAFFAYHAPHPDDLLSIIGTHRQWARQANSEFFAATRIGIG
+FT                   AEIAVDRLLKPNTSGELAGGQAAPAPHLEPVSHMWVTKFLRTHGLIHDCPKLVQLRTFP
+FT                   TVAVGGDPEAAEGLLTSMICHLAVFHPPDLVQIRVLTDNPEDPKWSWLKWLPHTQHQTD
+FT                   TDAAGPTRLVYTRPDGLSDLTARGPHTADAAPGGPYVVVVDLTGGKAGFPPDGRAGVTV
+FT                   ITLGAQRQAAYKLKVEKDGKAEDRLPNQPWREVTRVADRMTPGQAGRIARKLAGWSITG
+FT                   TIIDKNVRVQKKVSNEWHHLVWWWGAQSVEEVTPARWRMYADTDRDRLKIPFGHELKTGEIM
+FT                   YLDIKEGAEFGAGPHGMLIGTTGSGKSEFLRTLILSLVATHHPDQINLLLTDFKGGSTF
+FT                   LGMEKLPHTAAVVTNMEEEAELVSRMGEVLTGELDRRQSILRQAGMQVGAAGALSGVAE
+FT                   YEKHRERGADLPPLPTLFVVVDEFAELLQNHPDFINLFDRICRVGRSLRVHLLLATQSL
+FT                   NTGGVRIDKLEPNLTYRIALRTTSSAESKAVIGTPEAQYITNKESGVGFLRVGMEDPVK
+FT                   FRSVYTGNNYVPAAPESSDREAKPKAQRQSQVRIHQFTTTPIFDTAVS"
+FT   gene            85248..85541
+FT                   /locus_tag="MSMEG_0063"
+FT   CDS             85248..85541
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0063"
+FT                   /product="PE family protein"
+FT                   /db_xref="InterPro:IPR000084"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNJ3"
+FT                   /protein_id="ABK69830.1"
+FT                   /translation="MQPMTHNPGAEAVAAWWWQVIANAARGLAGGTTASAAVTALVPAGADE
+FT                   VSALAAVAFASEGVEALAANAFAQEELTRAGAAFAEIAGIYNAVDAANAATM"
+FT   gene            86997..87299
+FT                   /locus_tag="MSMEG_0065"
+FT   CDS             86997..87299
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0065"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="InterPro:IPR010310"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNJ5"
+FT                   /protein_id="ABK75930.1"
+FT                   /translation="MAAMNTDAAVLAKEAANFERISGELKGVIAQVESTGSALAAQMVG
+FT                   QAGTAAQAALARFHEAAAKQVQELNEISANWWWIHTSGTQYTSTDEDQAGTLASSMNI"
+FT   gene            87331..87618
+FT                   /locus_tag="MSMEG_0066"
+FT   CDS             87331..87618
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0066"
+FT                   /product="early secretory antigenic target, 6 kDa"
+FT                   /db_xref="InterPro:IPR010310"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNJ6"
+FT                   /protein_id="ABK75559.1"
+FT                   /translation="MTEQVWNFAGIEGGASEIHGAVSTTAGLLDEGKASLTTLASAWGG
+FT                   TGSEAYQAVQARWDSTSNELNLALQNLAQTISEWWWAGQTMAQTEAGVTGMFA"
+FT   gene            89159..90691
+FT                   /locus_tag="MSMEG_0068"
+FT   CDS             89159..90691
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0068"
+FT                   /product="probable conserved transmembrane protein"
+FT                   /note="identified by match to protein family HMM PF04600;
+FT                   match to protein family HMM TIGR02958"
+FT                   /db_xref="GOA:A0QNJ8"
+FT                   /db_xref="InterPro:IPR006707"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNJ8"
+FT                   /protein_id="ABK76080.1"
+FT                   /translation="MTSTAAAADTSSVTPGRPSTTRVTILTGKRMTDLVLPATAPIETY
+FT                   IDETVSFLAELLEDAPKDVLAGFNFGEQGVWAFARPGAPPLKADESLDDAGVVDGSLLT
+FT                   LVSVSRTERYRPLVEDVIDAIAVLDESPVFDRTALKHFVAIALPIVATIITVATLIAWT
+FT                   RSGHGWWWAVALGVLGLGLLGGSMAAKSRYNSLDMWWWSESLLLAATPALAGAVGLAVPLPR
+FT                   GVDGLGAPQLAGAAAVVLLLTLATRGGPRKRAEVASFVAVTSIAVTAAAIAFGYGWQEW
+FT                   VPAGAIAFGLIVVTNAAKLTVAVARIALPPIPAPGEHVSNDELLDPVVTPDSIDDASPT
+FT                   WQAIIASVPESAARLQERSQLTRQLLIGFLSAGALILTVGAIAVVVQGHFFVHSMIVAS
+FT                   LVTVICGFRSRLYAERWCAWALLAATVAVPTGLMIKLSMWWPDSAWIVMGIYTMLALIA
+FT                   LIVVGATDGVRRVSPVTKRILELFDGAAIAAVIPLLLWIAGVYDLLRNLRLH"
+FT   gene            93072..95339
+FT                   /locus_tag="MSMEG_0071"
+FT   CDS             93072..95339
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0071"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNK1"
+FT                   /protein_id="ABK69833.1"
+FT                   /translation="MMGLGKLEKPKGGHFDRMVGPGAWPETEESEFSNRQAEILGIRQR
+FT                   LTGAKESWQTHQSYLDSEATWAGTSARAANARVEQHTKSMVAHEHQLEKVEKWCGEAIG
+FT                   LIGTVKEAIIGTVNSAVEAINEAAADADKNETDASSKIEKIKDLAYDFNKSIVQWGADT
+FT                   VQGKEDIPSEPPKLPKDIFKNVEPATGSQDGEIRDGQADVLFMNSSLGGDASDVRASVK
+FT                   PSRPVDTWEQDNVGLGEDASGVRPTPAIEPPVEQVEPVNSGLGGEQPDIRPAPPIPQPV
+FT                   LGRPPSAPAPTAGGPSGPGSAISPSAPTPVSSSGPPTGGGGGTSIAPSSPLSSGSSLGG
+FT                   SGAEQAADASAAALGQNPVGRAPVDPLQQFTQSFSDSAGTPVHAASTGGGSVPPPPLTP
+FT                   PPTVPAGESMGPASAHSTPTSLNSAPAAPVQPPAAGGPMGAASGMPVAPPPLGPPPTPP
+FT                   PAAPVAAPPPAAAPPPAQPNAAGGGAQVAPIPVSAARAERDLAQRAVRRSGVDPMETAR
+FT                   RIAAALNAPGMTNVEDFKFFWVTGLTADGKIVVANNYGIAYIPQQVHLPEQVHMASADE
+FT                   SISPAERARWVNEPIVAVQRWAEHHGKNLRAWWWVIATEDQLKNSDAGVHHEVLRPEDIPEG
+FT                   GKMAGRDRLQVIAPDVSAQLARVSDTDLVKILPPAPADANPPEDRRKLLWDNVWKPLAS
+FT                   RSTKRGERHLAAFVAYAAHAQEHALYAAHTAALPDDQRQAIREFIYWQHVGQLTADALS
+FT                   PA"
+FT   gene            complement(811187..811729)
+FT                   /locus_tag="MSMEG_0723"
+FT   CDS             complement(811187..811729)
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0723"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QQE1"
+FT                   /protein_id="ABK71164.1"
+FT                   /translation="MFPKCPQTPIIQAGLLAISAMSLQCGLGTPDDGSRFGDGCGEFRK
+FT                   TDELQESAAPNEQWQGSASKAYDAQVVRWWWQRERAQKLAQADEMMQEVIRSQAEQVSQTRQ
+FT                   LLDIYSIALAAMIVPATIAMYTPYGQPASVAIQAGAVAGTVPLATGSMLAMAALANANA
+FT                   AKVLQATAHYTEVAGEA"
+FT   gene            77398..77925
+FT                   /locus_tag="MSMEG_0058"
+FT   CDS             77398..77925
+FT                   /codon_start=1
+FT                   /transl_table=11
+FT                   /locus_tag="MSMEG_0058"
+FT                   /product="conserved hypothetical protein"
+FT                   /db_xref="UniProtKB/TrEMBL:A0QNI8"
+FT                   /protein_id="ABK72886.1"
+FT                   /translation="MGDGSPYDPEYDDDHDSLAALDFPGTDDEPESSLDVFDVFDVGAP
+FT                   ADEPWDAATSADGDGEDETPAPVFTVWWWTNPPGTVTVAAYLDGRVHQIALSPKVVNMTERE
+FT                   LADEIRVIADLAGEQARSAQYSFMLEGMREHGHDDAATRDFLTRDLNLPTPEQADANQA
+FT                   QVFSTRYGGDHG"
+//
