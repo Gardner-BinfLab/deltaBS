@@ -16,19 +16,19 @@ my ($embl1, $embl2, $pfamannot1, $pfamannot2, $outdir, $orthlist, $hmmer_path, $
 my $identifier = int(rand(10000));
 
 &GetOptions(
-	"e1|embl1=s"	 => \$embl1,
-	"e2|embl2=s"	 => \$embl2,
-	"o|outdir=s"	 => \$outdir,
-	"ol|orthlist=s"	 => \$orthlist,
-        "pa1|pfamannot1" => \$pfamannot1,
-        "pa2|pfamannot2" => \$pfamannot2,
-	"hp|hmmerpath=s" => \$hmmer_path,
-	"c|cpus=i"	 => \$cpus,
-	"hd|hmmlibdir=s" => \$hmm_lib_path,
-	"t|tempdir=s"	 => \$tmp_dir,
-	"v|verbose"	 => \$verbose,
-	"p|post"	 => \$post,
-	"h|help"	 => \$help
+	"e1|embl1=s"	   => \$embl1,
+	"e2|embl2=s"	   => \$embl2,
+	"o|outdir=s"	   => \$outdir,
+	"ol|orthlist=s"	   => \$orthlist,
+        "pa1|pfamannot1=s" => \$pfamannot1,
+        "pa2|pfamannot2=s" => \$pfamannot2,
+	"hp|hmmerpath=s"   => \$hmmer_path,
+	"c|cpus=i"	   => \$cpus,
+	"hd|hmmlibdir=s"   => \$hmm_lib_path,
+	"t|tempdir=s"	   => \$tmp_dir,
+	"v|verbose"	   => \$verbose,
+	"p|post"	   => \$post,
+	"h|help"	   => \$help
 	);
 
 
@@ -120,11 +120,17 @@ if(not defined($pfamannot1)){
     print STDERR "Running hmmscan on [$embl1] sequences with Pfam HMMs..." if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
 }
+else{
+    print "skipping hmmscan\'ing [$embl1]. Using [$pfamannot1] instead.\n" if $verbose;
+}
 
 if(not defined($pfamannot2)){
     $pfamannot2 = "$embl2-pfam_hmmscan1.tbl";
     print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs..." if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
+}
+else{
+    print "skipping hmmscan\'ing [$embl2]. Using [$pfamannot2] instead.\n" if $verbose;
 }
 
 print STDERR "done hmmscan\47ing.\n" if $verbose;
@@ -716,7 +722,7 @@ sub parse_hmmscan_tbl {
 	my ($tbl) = @_;
 	my %hits;
 	open TBL, "<", $tbl;
-
+	
 	while(<TBL>){
 		next if($_ =~ /^#/);
 		chomp;
