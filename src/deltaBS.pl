@@ -517,7 +517,7 @@ sub get_domain_arch {
 	my ($hit) = @_;
 	#print ">>",$hits,"\t", scalar($hits->[0]),"<<\n";
 	my @arch;
-	my @sorted = sort {$a->[3] < $b->[3]} @$hit; #sort on start coords
+	my @sorted = sort {$a->[3] > $b->[3]} @$hit; #sort on start coords
 	#print "sorted: ", $#sorted,"\n";
 	my %segments;
 	my $seg_count = 0;
