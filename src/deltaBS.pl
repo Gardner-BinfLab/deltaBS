@@ -160,6 +160,7 @@ if(not defined($orthlist)){
 		print OUT $key,"\t",$orths{$key},"\n";
 	}
 	print STDERR "done. Ad hoc ortholog list printed to $outdir/orthlist.dbs\n" if $verbose;
+	close OUT;
 } else {
 	print STDERR "Reading ortholog list: $orthlist..." if $verbose;
 	open ORTHS, "<$orthlist";
@@ -224,6 +225,7 @@ foreach my $key (keys(%orths)){
 		print OUT "\n";
 	}
 }
+close OUT;
 print STDERR "done.\n" if $verbose;
 print STDERR "Incompatible architectures detected in orthologous CDSes, printed to $outdir/inc_archs.dbs\n";
 
@@ -280,7 +282,7 @@ print STDERR "done.\n" if $verbose;
 
 print STDERR "Cleaning up temp files..." if $verbose;
 #clean up
-#system("rm $tmpdir") == 0 or die "Couldn't rm $tmpdir: $!";
+system("rm -rf $tmp_dir") == 0 or die "Couldn't rm $tmp_dir: $!";
 print STDERR "done. Results should be in $outdir/results.dbs\n" if $verbose;
 
 if(defined($post)){
@@ -758,6 +760,7 @@ sub read_fasta {
 		$seq .= $_;
 	}
 	$f{$name} = $seq;
+	close FA;
 
 	return(\%f);
 }
