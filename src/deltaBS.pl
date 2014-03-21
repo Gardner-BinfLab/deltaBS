@@ -12,23 +12,26 @@ use Statistics::Distributions;
 
 use Getopt::Long;
 
-my ($embl1, $embl2, $pfamannot1, $pfamannot2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $help);
+my ($embl1, $embl2, $pfamannot1, $pfamannot2, $phmmerannot1, $phmmerannot2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $dirty, $help);
 my $identifier = int(rand(10000));
 
 &GetOptions(
-	"e1|embl1=s"	   => \$embl1,
-	"e2|embl2=s"	   => \$embl2,
-	"o|outdir=s"	   => \$outdir,
-	"ol|orthlist=s"	   => \$orthlist,
-        "pa1|pfamannot1=s" => \$pfamannot1,
-        "pa2|pfamannot2=s" => \$pfamannot2,
-	"hp|hmmerpath=s"   => \$hmmer_path,
-	"c|cpus=i"	   => \$cpus,
-	"hd|hmmlibdir=s"   => \$hmm_lib_path,
-	"t|tempdir=s"	   => \$tmp_dir,
-	"v|verbose"	   => \$verbose,
-	"p|post"	   => \$post,
-	"h|help"	   => \$help
+	"e1|embl1=s"	     => \$embl1,
+	"e2|embl2=s"	     => \$embl2,
+	"o|outdir=s"	     => \$outdir,
+	"ol|orthlist=s"	     => \$orthlist,
+        "pa1|pfamannot1=s"   => \$pfamannot1,
+        "pa2|pfamannot2=s"   => \$pfamannot2,
+        "ph1|phmmerannot1=s" => \$phmmerannot1,
+        "ph2|phmmerannot2=s" => \$phmmerannot2,
+	"hp|hmmerpath=s"     => \$hmmer_path,
+	"c|cpus=i"	     => \$cpus,
+	"hd|hmmlibdir=s"     => \$hmm_lib_path,
+	"t|tempdir=s"	     => \$tmp_dir,
+	"v|verbose"	     => \$verbose,
+        "d|dirty"            => \$dirty,
+	"p|post"	     => \$post,
+	"h|help"	     => \$help
 	);
 
 
@@ -153,7 +156,13 @@ print STDERR "done.\n" if $verbose;
 my %orths;
 if(not defined($orthlist)){
 	print STDERR "Since no ortholog list provided, predicting orthologs with phmmer..." if $verbose;
-	my $ref = &predict_orths_phmmer($fasta1, $fasta2);
+	my $ref;
+	if(defined($phmmerannot1) and defined($phmmerannot2)){
+	    $ref = &predict_orths_phmmer($fasta1, $fasta2, $phmmerannot1, $phmmerannot2);
+	}
+	else{
+	    $ref = &predict_orths_phmmer($fasta1, $fasta2);
+	}
 	%orths = %$ref;
 	open OUT, ">", "$outdir/orthlist.dbs";
 	foreach my $key (keys(%orths)){
@@ -282,8 +291,10 @@ print STDERR "done.\n" if $verbose;
 
 print STDERR "Cleaning up temp files..." if $verbose;
 #clean up
-system("rm -rf $tmp_dir") == 0 or die "Couldn't rm $tmp_dir: $!";
-print STDERR "done. Results should be in $outdir/results.dbs\n" if $verbose;
+if(not defined($dirty)){
+    system("rm -rf $tmp_dir") == 0 or die "Couldn't rm $tmp_dir: $!";
+    print STDERR "done. Results should be in $outdir/results.dbs\n" if $verbose;
+}
 
 if(defined($post)){
 	print STDERR "Post-processing results..." if $verbose;
@@ -607,64 +618,83 @@ sub get_domain_arch {
 #predict_orths_phmmer: given two fasta files run 
 #reciprocal phmmer searches; take lowest average
 #evalue as indicative of orthology.
+#ADD SUM OVER MULTIPLE LOCAL HITS AND A COVERAGE THRESHOLD!!!
 ###################################################
 sub predict_orths_phmmer {
-	my($fasta1, $fasta2) = @_;
+	my($fasta1, $fasta2) = ($_[0], $_[1]);
 	my ($line, $seq, $name);
-	my ($f1, $f2);
+	my ($f1, $f2, $l1, $l2);
 	my $f1_tmp = "$tmp_dir/DELTABS_f1.fa";
 	my $f2_tmp = "$tmp_dir/DELTABS_f2.fa";
 	my $f1_tbl = "$tmp_dir/DELTABS_fa1.tbl";
 	my $f2_tbl = "$tmp_dir/DELTABS_fa2.tbl";
+	my $f1_domtbl = "$tmp_dir/DELTABS_fa1.domtbl";
+	my $f2_domtbl = "$tmp_dir/DELTABS_fa2.domtbl";
 	my %orths;
 	my %pairs;
+	my %coverage;
 	
 	#read in fasta files
-	$f1 = &read_fasta($fasta1);
-	$f2 = &read_fasta($fasta2);
-
-	my $f1_no = scalar keys(%$f1); #searching f1 seq against entire f2 database each time;
-				    #only searching f2 seqs against f1 query, need to jigger
-				    #E-values with -Z hmmer option
+	#$f1 = &read_fasta($fasta1);
+	#$f2 = &read_fasta($fasta2);	
+	$l1 = &find_seq_lengths($fasta1); 
+	$l2 = &find_seq_lengths($fasta2); 
 	
+	my $l1_no = scalar keys(%$l1); 
+	
+	if (defined($_[2]) && defined($_[3])){
+	    ($f1_domtbl, $f2_domtbl)=($_[2], $_[3]); 
+	}
+	else {
 	#loop through f1 searching each seq against fasta2
 	#reciprocally search seqs from f2 which are hit at
 	#E < 0.1
-	system("$hmmer_path/phmmer -o /dev/null --noali --cpu $cpus --tblout $f1_tbl -E 0.000001 $fasta1 $fasta2") == 0 or die "phmmer failed: $!";
-	system("$hmmer_path/phmmer -o /dev/null --noali --cpu $cpus --tblout $f2_tbl -E 0.000001 $fasta2 $fasta1") == 0 or die "phmmer failed: $!";
+	    system("$hmmer_path/phmmer -o $f1_tbl.phmmer --noali --cpu $cpus --domtblout $f1_domtbl --tblout $f1_tbl -E 0.000001 $fasta1 $fasta2") == 0 or die "phmmer failed: $!";
+	    system("$hmmer_path/phmmer -o $f2_tbl.phmmer --noali --cpu $cpus --domtblout $f2_domtbl --tblout $f2_tbl -E 0.000001 $fasta2 $fasta1") == 0 or die "phmmer failed: $!";
+	}
 	
-	my $f1_hits = &parse_phmmer_tbl2($f1_tbl);
-	my $f2_hits = &parse_phmmer_tbl2($f2_tbl);
+#	my $f1_hits = &parse_phmmer_tbl2($f1_tbl);
+#	my $f2_hits = &parse_phmmer_tbl2($f2_tbl);
+	my ($f1_hits, $f1_lengths) = &parse_phmmer_tbl3($f1_domtbl);
+	my ($f2_hits, $f2_lengths) = &parse_phmmer_tbl3($f2_domtbl);
 	
-	foreach my $id1 (keys(%$f1)){
+	foreach my $id1 (keys(%$l1)){
 	    
 	    my $max = 1;
-	    #print "[$id1]\n";
+	    print "predict_orths_phmmer:[$id1]\t";
 	    #print "\t2:1[$f2_hits->{$id1}]\n";
 	    
 	    next if(!$f2_hits->{$id1});
 	    my $f2_orth;
-	    foreach my $id2 (keys(%$f2)){
+	    foreach my $id2 (keys(%$l2)){
 		next if(!$f1_hits->{$id2});
 		next if(!$f1_hits->{$id2}{$id1});
 		next if(!$f2_hits->{$id1}{$id2});
-		#print "\t[$id2]\n";
+		print "\t[$id2]";
+		#print "HERE!\t";
 		$pairs{"$id1:$id2"}=$f1_hits->{$id2}{$id1} + $f2_hits->{$id1}{$id2};
-		#print "\t\t$id1:$id2 -> " . $pairs{"$id1:$id2"} . "\n"; 
+		my @coverage = (($f1_lengths->{$id2}{$id1}{$id2}/$l2->{$id2}), ($f1_lengths->{$id2}{$id1}{$id1}/$l1->{$id1}), ($f2_lengths->{$id1}{$id2}{$id2}/$l2->{$id2}), ($f2_lengths->{$id1}{$id2}{$id1}/$l1->{$id1}));
+		
+		print "coverage:[@coverage]\t";
+		$coverage{"$id1:$id2"}=minA( @coverage  ); 
+		print "\t\t$id1:$id2 -> pairs:[" . $pairs{"$id1:$id2"} . "]\tcoverage:[" . $coverage{"$id1:$id2"} . "]"; 
 	    }
+	    print "\n";
 	}
 	
 	
 	my %seen;
 	#Sort on sum of reciprocal phmmer bitscores:
-	foreach my $p ( sort {$pairs{$a} <=> $pairs{$b}} keys %pairs){
+	foreach my $p ( sort {$pairs{$b} <=> $pairs{$a}} keys %pairs){
 	    
 	    my ($id1, $id2) = split(/:/, $p); 
+	    print "$id1\t$id2\t$pairs{$p}\t" . $coverage{"$id1:$id2"} . "\n";
 	    next if defined $seen{$id1};
 	    next if defined $seen{$id2};
-	    if ($pairs{$p} > 20){
+	    if ($pairs{$p} > 20 && $coverage{"$id1:$id2"}>0.8){
 		$orths{$id1} = $id2;
 		($seen{$id2},$seen{$id1})=(1,1);
+		print "YES!\n"; 
 	    }
 	}
 	
@@ -707,11 +737,44 @@ sub parse_phmmer_tbl2 {
 		next if($_ =~ /^#/);
 		chomp;
 		my @splat = split /\s+/;
-		$hits{$splat[0]}{$splat[2]} = $splat[5];
+		$hits{$splat[0]}{$splat[2]} = 0 if (not defined($hits{$splat[0]}{$splat[2]})); 
+		$hits{$splat[0]}{$splat[2]} += $splat[5]; #really should check if hits overlap
 	}
 	close TBL;
 	return 0 if(! scalar(keys(%hits)));
 	return \%hits;
+}
+
+###################################################
+#parse_phmmer_tbl3: parse phmmer domain table output
+###################################################
+##                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+## target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+##------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+#t0001                -             21 SL1344_0001          -             28   5.6e-09   31.9   5.3   1   1   1.3e-12   5.7e-09   31.9   5.3     8    28     1    21     1    21 0.98 -
+sub parse_phmmer_tbl3 {
+	my($tbl) = @_;
+	my (%hits, %lengths);
+	open TBL, "<", $tbl or die "Cannot open $tbl: $!";
+	
+	while(<TBL>){
+		next if($_ =~ /^#/);
+		chomp;
+		my @splat = split /\s+/;
+		$hits{$splat[0]}{$splat[3]} = 0 if (not defined($hits{$splat[0]}{$splat[3]})); 
+		$hits{$splat[0]}{$splat[3]} += $splat[7]; #really should check if hits overlap
+		
+		$lengths{$splat[0]}{$splat[3]}{$splat[0]} = 0 if (not defined($lengths{$splat[0]}{$splat[3]}{$splat[0]})); 
+		$lengths{$splat[0]}{$splat[3]}{$splat[3]} = 0 if (not defined($lengths{$splat[0]}{$splat[3]}{$splat[3]})); 
+		$lengths{$splat[0]}{$splat[3]}{$splat[3]} += ($splat[16] - $splat[15] + 1); #hmm coord -- query
+		$lengths{$splat[0]}{$splat[3]}{$splat[0]} += ($splat[18] - $splat[17] + 1); #ali coord -- target 
+		
+		#printf "parse_phmmer_tbl3: [$splat[0]]:[$splat[3]]\tbits[$splat[7]]\tl1:[%d]\tl2:[%d]\n", ($splat[16] - $splat[15] + 1), ($splat[18] - $splat[17] + 1);
+		
+	}
+	close TBL;
+	return 0 if(! scalar(keys(%hits)));
+	return (\%hits, \%lengths);
 }
 
 ###################################################
@@ -763,6 +826,27 @@ sub read_fasta {
 	close FA;
 
 	return(\%f);
+}
+
+
+###################################################
+#find_seq_lengths: given a fasta file name, read it in to
+#a hash with ID => seq length
+###################################################
+sub find_seq_lengths {
+    
+	my($fasta) = @_;
+	my ($name);
+	my %l;
+	
+	open(STAT, "esl-seqstat -a $fasta |") or die "Unable to open pipe for [esl-seqstat -a $fasta].\n[$!]";
+	while(<STAT>){
+	    if(/^\=\s+(\S+)\s+(\d+)/){		
+		$l{$1}=$2; 		
+		#print "find_seq_lengths:\t[$1]\t[$2]\n"; 
+	    }	    
+	}	
+	return(\%l);	
 }
 
 ###################################################
@@ -917,6 +1001,50 @@ sub cds_locations
   return \@cds_coordinates;
 }
 
+######################################################################
+#Max and Min
+#max
+sub max {
+  return $_[0] if @_ == 1;
+  $_[0] > $_[1] ? $_[0] : $_[1]
+}
+
+#min
+sub min {
+  return $_[0] if @_ == 1;
+  $_[0] < $_[1] ? $_[0] : $_[1]
+}
+######################################################################
+#Max and Min for arrays:
+#max
+sub maxA {
+    my $max = $_[0];
+    foreach my $a (@_){
+	$max = max($max, $a) if isNumeric($a);
+    }
+    return $max;
+}
+
+#min
+sub minA {
+    my $min = $_[0];
+    foreach my $a (@_){
+	$min = min($min, $a) if isNumeric($a);
+    }
+    return $min;
+}
+
+######################################################################
+sub isNumeric {
+    my $num = shift;
+    if ($num=~/^-?\d+\.?\d*$/) { 
+	return 1; 
+    }
+    else {
+	return 0;
+    }
+}
+
 ###################################################
 #help
 ###################################################
@@ -932,6 +1060,10 @@ Options:
 	-h  / --help		:	This screen
 	-e1 / --embl1		:	Reference genome with annotations in EMBL format
 	-e2 / --embl2		:	Comparator genome with annotations in EMBL format
+	-pa1/ --pfamannot1      :       Pfam annotations of proteome1
+	-pa2/ --pfamannot2      :       Pfam annotations of proteome2
+	-ph1/ --phmmerannot1    :       phmmer domtblout of proteome1 vs proteome2
+	-ph2/ --phmmerannot2    :       phmmer domtblout of proteome2 vs proteome1
 	-o  / --outdir		:	Output directory
 	-ol / --orthlist        :       Ortholog list file
 	-hp / --hmmerpath	:	Path to hmmer installation
@@ -939,6 +1071,7 @@ Options:
 	-c  / --cpus            :       Number of CPUs for hmmsearch, phmmer etc to use. 
 	-t  / --tempdir		:	Path to temporary directory
 	-p  / --post		:	Enable post-processing (pathways, etc.)
+	-d  / --dirty           :       Do not delete /tmp file
 	-v  / --verbose		:	Turn on verbose messaging
 
 TODO:
