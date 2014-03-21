@@ -9,6 +9,7 @@ use Bio::SeqIO;
 use Bio::SearchIO;
 use Bio::SeqFeature::Generic;
 use Statistics::Distributions;
+#use Data::Dumper;
 
 use Getopt::Long;
 
@@ -124,7 +125,7 @@ if(not defined($pfamannot1)){
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
-    print "skipping hmmscan\'ing [$embl1]. Using [$pfamannot1] instead.\n" if $verbose;
+    print STDERR"skipping hmmscan\'ing [$embl1]. Using [$pfamannot1] instead.\n" if $verbose;
 }
 
 if(not defined($pfamannot2)){
@@ -133,7 +134,7 @@ if(not defined($pfamannot2)){
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
-    print "skipping hmmscan\'ing [$embl2]. Using [$pfamannot2] instead.\n" if $verbose;
+    print STDERR "skipping hmmscan\'ing [$embl2]. Using [$pfamannot2] instead.\n" if $verbose;
 }
 
 print STDERR "done hmmscan\47ing.\n" if $verbose;
@@ -180,6 +181,7 @@ if(not defined($orthlist)){
 		my @splat = split /\t/;
 		$orths{$splat[0]} = $splat[1];
 	}
+	close ORTHS;
 	print STDERR "Done.\n" if $verbose;
 }
 
@@ -194,12 +196,31 @@ my $inc_file = "$outdir/inc_archs.dbs";
 unlink $inc_file if ( -e $inc_file);
 foreach my $key (keys(%orths)){
 	next if(!defined($scan1->{$key}) || !defined($scan2->{$orths{$key}}));
-	#print "SCAN:$key ", $scan1->{$key}[0][0],"\n";
-	#print "SCAN:$orths{$key} ", $scan2->{$orths{$key}}[0][0],"\n";
+#	foreach my $i (0..$#{$scan1->{$key}}){
+#		print STDERR "SCAN:$key ", $scan1->{$key}[$i][3],"\n";
+#		print STDERR Dumper $scan1->{$key};
+#		print STDERR "SCAN:$orths{$key} ", $scan2->{$orths{$key}}[$i][3],"\n";
+#		print STDERR Dumper $scan2->{$orths{$key}};
+#	}
 	#my $hits = $scan1->{$key}; 
 	#print "HITS!! ",$hits->[0][0],"\n";
+	#print "DUMP SCAN", Dumper $scan1->{$key};
 	my $arch1 = &get_domain_arch($scan1->{$key});
+	#foreach my $i (0..$#{$arch1}){
+	#	print "DOM $key $i:$arch1->[$i][0]\n";
+	#}
+	#print "DUMP SCAN", Dumper $scan2->{$orths{$key}};
 	my $arch2 = &get_domain_arch($scan2->{$orths{$key}});
+	#print "DUMP ARCH", Dumper $arch2;
+	#print "***\n";
+	#foreach my $i (0..$#{$arch2}){
+	#	print "DOM $orths{$key} $i:$arch2->[$i][0]\n";
+	#}
+	#print $key, "\t", $orths{$key},"\n";
+	#print "REF: $arch1\n";
+	#print Dumper $arch1;
+	#print "REF: $arch2\n";
+	#print Dumper $arch2;
 	if(&comp_archs($arch1, $arch2)){
 		#domain, eval, score, start, end
 		foreach my $i (0..scalar($#$arch1)){
@@ -506,7 +527,10 @@ sub calc_sd {
 ###################################################
 sub comp_archs {
 	my($arch1,$arch2) = @_;
-
+	#print "REF: $arch1\n";
+	#print Dumper $arch1;
+	#print "REF: $arch2\n";
+	#print Dumper $arch2;
 	#print "ARCH $arch1 $arch2\n";
 	if($#$arch1 != $#$arch2){
 		return 0;
@@ -515,6 +539,10 @@ sub comp_archs {
 	foreach my $i (0..$#$arch1){
 		#print "ARCH: $i ", $arch1->[$i][0],"\t",$arch2->[$i][0],"\n";
 		if($arch1->[$i][0] ne $arch2->[$i][0]){
+		#	print "inc!\n";
+			#foreach my $j ($i+1..$#$arch1){
+			#	print "ARCH: $j ", $arch1->[$j][0],"\t",$arch2->[$j][0],"\n";
+			#}
 			return 0;
 		}
 	}
@@ -530,8 +558,10 @@ sub get_domain_arch {
 	my ($hit) = @_;
 	#print ">>",$hits,"\t", scalar($hits->[0]),"<<\n";
 	my @arch;
-	my @sorted = sort {$a->[3] > $b->[3]} @$hit; #sort on start coords
+	#print "HIT:", Dumper $hit;
+	my @sorted = sort {$a->[3] <=> $b->[3]} @$hit; #sort on start coords
 	#print "sorted: ", $#sorted,"\n";
+	#print "SORTED:", Dumper @sorted;
 	my %segments;
 	my $seg_count = 0;
 	my @cont;
@@ -1078,9 +1108,7 @@ TODO:
 
 1. Find a more accurate approach for ortholog mappings
 2. try hmmsearch instead of hmmscan
-3. 
-
-orthologue: use reciprocal 80% coverage
+3. ortholog: use reciprocal 80% coverage
 
 
 EOF
