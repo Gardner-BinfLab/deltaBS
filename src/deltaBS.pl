@@ -600,16 +600,16 @@ sub get_domain_arch {
 			my $winner;
 			foreach my $dom (@{$cont[$seg]}){
 				#print $dom, "dom\n";
-				if($sorted[$dom][1] < $min){
-					$min = $sorted[$dom][1];
-					#print $min, "min\n";
-					$winner = $dom;
+			        if($sorted[$dom][1] < $min){
+				    $min = $sorted[$dom][1];
+				    #print $min, "min\n";
+				    $winner = $dom;
 				}
 			}
 			$arch[$seg] = [@{$sorted[$winner]}];
 		}
 	}
-
+	
 	return \@arch;
 }
 	
@@ -661,7 +661,7 @@ sub predict_orths_phmmer {
 	foreach my $id1 (keys(%$l1)){
 	    
 	    my $max = 1;
-	    print "predict_orths_phmmer:[$id1]\t";
+	    #print "predict_orths_phmmer:[$id1]\t";
 	    #print "\t2:1[$f2_hits->{$id1}]\n";
 	    
 	    next if(!$f2_hits->{$id1});
@@ -670,16 +670,16 @@ sub predict_orths_phmmer {
 		next if(!$f1_hits->{$id2});
 		next if(!$f1_hits->{$id2}{$id1});
 		next if(!$f2_hits->{$id1}{$id2});
-		print "\t[$id2]";
+		#print "\t[$id2]";
 		#print "HERE!\t";
 		$pairs{"$id1:$id2"}=$f1_hits->{$id2}{$id1} + $f2_hits->{$id1}{$id2};
 		my @coverage = (($f1_lengths->{$id2}{$id1}{$id2}/$l2->{$id2}), ($f1_lengths->{$id2}{$id1}{$id1}/$l1->{$id1}), ($f2_lengths->{$id1}{$id2}{$id2}/$l2->{$id2}), ($f2_lengths->{$id1}{$id2}{$id1}/$l1->{$id1}));
 		
-		print "coverage:[@coverage]\t";
+		#print "coverage:[@coverage]\t";
 		$coverage{"$id1:$id2"}=minA( @coverage  ); 
-		print "\t\t$id1:$id2 -> pairs:[" . $pairs{"$id1:$id2"} . "]\tcoverage:[" . $coverage{"$id1:$id2"} . "]"; 
+		#print "\t\t$id1:$id2 -> pairs:[" . $pairs{"$id1:$id2"} . "]\tcoverage:[" . $coverage{"$id1:$id2"} . "]"; 
 	    }
-	    print "\n";
+	    #print "\n";
 	}
 	
 	
@@ -688,13 +688,13 @@ sub predict_orths_phmmer {
 	foreach my $p ( sort {$pairs{$b} <=> $pairs{$a}} keys %pairs){
 	    
 	    my ($id1, $id2) = split(/:/, $p); 
-	    print "$id1\t$id2\t$pairs{$p}\t" . $coverage{"$id1:$id2"} . "\n";
 	    next if defined $seen{$id1};
 	    next if defined $seen{$id2};
-	    if ($pairs{$p} > 20 && $coverage{"$id1:$id2"}>0.8){
+	    if ($pairs{$p} > 20 && $coverage{"$id1:$id2"}>0.75){
 		$orths{$id1} = $id2;
 		($seen{$id2},$seen{$id1})=(1,1);
-		print "YES!\n"; 
+		#print "$id1\t$id2\t$pairs{$p}\t" . $coverage{"$id1:$id2"} . "\n";
+		#print "YES!\n"; 
 	    }
 	}
 	
