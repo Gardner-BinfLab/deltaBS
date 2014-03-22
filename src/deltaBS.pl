@@ -9,7 +9,7 @@ use Bio::SeqIO;
 use Bio::SearchIO;
 use Bio::SeqFeature::Generic;
 use Statistics::Distributions;
-#use Data::Dumper;
+use Data::Dumper;
 
 use Getopt::Long;
 
@@ -196,20 +196,16 @@ my $inc_file = "$outdir/inc_archs.dbs";
 unlink $inc_file if ( -e $inc_file);
 foreach my $key (keys(%orths)){
 	next if(!defined($scan1->{$key}) || !defined($scan2->{$orths{$key}}));
-#	foreach my $i (0..$#{$scan1->{$key}}){
-#		print STDERR "SCAN:$key ", $scan1->{$key}[$i][3],"\n";
-#		print STDERR Dumper $scan1->{$key};
-#		print STDERR "SCAN:$orths{$key} ", $scan2->{$orths{$key}}[$i][3],"\n";
-#		print STDERR Dumper $scan2->{$orths{$key}};
-#	}
 	#my $hits = $scan1->{$key}; 
 	#print "HITS!! ",$hits->[0][0],"\n";
 	#print "DUMP SCAN", Dumper $scan1->{$key};
+	#print $key, "\n";
 	my $arch1 = &get_domain_arch($scan1->{$key});
 	#foreach my $i (0..$#{$arch1}){
 	#	print "DOM $key $i:$arch1->[$i][0]\n";
 	#}
 	#print "DUMP SCAN", Dumper $scan2->{$orths{$key}};
+	#print $orths{$key}, "\n";
 	my $arch2 = &get_domain_arch($scan2->{$orths{$key}});
 	#print "DUMP ARCH", Dumper $arch2;
 	#print "***\n";
@@ -579,6 +575,7 @@ sub get_domain_arch {
 				#	$segments{$i1} = $seg_count;
 				#	push @{$cont[$seg_count]}, $i1;
 				#}
+				last;
 			} else {
 				$seg_count++;
 				push @{$cont[$seg_count]}, $i2;
@@ -598,6 +595,7 @@ sub get_domain_arch {
 	#print "SEGS: ", $seg_count, "\n";
 	foreach my $seg (0..$seg_count) {
 		if($#{$cont[$seg]} == 0){ #trivial case, n domains = 1
+			#print "here\n";
 			$arch[$seg] = [@{$sorted[$cont[$seg][0]]}];
 			next;
 		}
@@ -628,6 +626,7 @@ sub get_domain_arch {
 		else { #all Pfams, compete them
 			my $min = 1;
 			my $winner;
+			#print "SEG:",Dumper $cont[$seg];
 			foreach my $dom (@{$cont[$seg]}){
 				#print $dom, "dom\n";
 			        if($sorted[$dom][1] < $min){
@@ -639,7 +638,7 @@ sub get_domain_arch {
 			$arch[$seg] = [@{$sorted[$winner]}];
 		}
 	}
-	
+	#print "RESOLVED:", Dumper @arch;	
 	return \@arch;
 }
 	
