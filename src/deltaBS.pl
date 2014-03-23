@@ -107,7 +107,7 @@ if (defined($post)){
 system("mkdir -p $outdir") == 0 or die "Couldn't create $outdir: $!";
 
 #generate fasta files, get annotation hash refs
-print STDERR "Generating proteome fasta files in $tmp_dir..." if $verbose;
+print STDERR "Generating proteome fasta files in $tmp_dir...\n" if $verbose;
 my $fasta1 = "$tmp_dir/DELTABS_embl1.fasta";
 my $fasta2 = "$tmp_dir/DELTABS_embl2.fasta";
 #my $fasta1 = "tmp/DBS.8392/DELTABS_embl1.fasta";
@@ -121,7 +121,7 @@ print STDERR "done.\n" if $verbose;
 
 if(not defined($pfamannot1)){
     $pfamannot1 = "$embl1-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$embl1] sequences with Pfam HMMs..." if $verbose;
+    print STDERR "Running hmmscan on [$embl1] sequences with Pfam HMMs...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
@@ -130,7 +130,7 @@ else{
 
 if(not defined($pfamannot2)){
     $pfamannot2 = "$embl2-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs..." if $verbose;
+    print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
@@ -144,7 +144,7 @@ print STDERR "done hmmscan\47ing.\n" if $verbose;
 #my $pfamannot1 = "tmp/DBS.8392/DELTABS_hmmscan1.tbl";
 #my $pfamannot2 = "tmp/DBS.8392/DELTABS_hmmscan2.tbl";
 #parse hmmscan results
-print STDERR "Parsing hmmscan results..." if $verbose;
+print STDERR "Parsing hmmscan results...\n" if $verbose;
 die "hmmscan results $pfamannot1 empty for $fasta1!" if (-z $pfamannot1);
 my $scan1 = &parse_hmmscan_tbl($pfamannot1);
 die "hmmscan results $pfamannot2 empty for $fasta2!" if (-z $pfamannot2);
@@ -156,7 +156,7 @@ print STDERR "done.\n" if $verbose;
 #get ortholog list
 my %orths;
 if(not defined($orthlist)){
-	print STDERR "Since no ortholog list provided, predicting orthologs with phmmer..." if $verbose;
+	print STDERR "Since no ortholog list provided, predicting orthologs with phmmer...\n" if $verbose;
 	my $ref;
 	if(defined($phmmerannot1) and defined($phmmerannot2)){
 	    $ref = &predict_orths_phmmer($fasta1, $fasta2, $phmmerannot1, $phmmerannot2);
@@ -172,7 +172,7 @@ if(not defined($orthlist)){
 	print STDERR "done. Ad hoc ortholog list printed to $outdir/orthlist.dbs\n" if $verbose;
 	close OUT;
 } else {
-	print STDERR "Reading ortholog list: $orthlist..." if $verbose;
+	print STDERR "Reading ortholog list: $orthlist...\n" if $verbose;
 	open ORTHS, "<$orthlist";
 	while(<ORTHS>){
 		next if ($_ =~ /^#/);
@@ -188,7 +188,7 @@ if(not defined($orthlist)){
 
 
 #filter orthologs on identical architecture
-print STDERR "Determining and filtering domain architecture, calculating delta BS..." if $verbose;
+print STDERR "Determining and filtering domain architecture, calculating delta BS...\n" if $verbose;
 my %dbs;
 my @score_dist;
 my $inc = 0;
@@ -270,7 +270,7 @@ $mean = $shrunken->[1];
 print STDERR "final mean: $mean; final sd: $sd\n";
 #calculate Z-scores and stat sig
 #note, using mean of 0 for Z-score, calculated SD
-print STDERR "Calculating Z-scores, p-values..." if $verbose;
+print STDERR "Calculating Z-scores, p-values...\n" if $verbose;
 my @outtable;
 foreach my $key (keys(%dbs)){
 	foreach my $dom (@{$dbs{$key}}){
@@ -286,7 +286,7 @@ foreach my $key (keys(%dbs)){
 }
 print STDERR "done.\n" if $verbose;
 
-print STDERR "Sorting, printing results..." if $verbose;
+print STDERR "Sorting, printing results...\n" if $verbose;
 #sort out table, print results!
 my @sortedtable = sort{$b->[9] <=> $a->[9]} @outtable;
 open OUT, ">$outdir/results.dbs";
@@ -306,7 +306,7 @@ foreach my $row (@sortedtable){
 close OUT;
 print STDERR "done.\n" if $verbose;
 
-print STDERR "Cleaning up temp files..." if $verbose;
+print STDERR "Cleaning up temp files...\n" if $verbose;
 #clean up
 if(not defined($dirty)){
     system("rm -rf $tmp_dir") == 0 or die "Couldn't rm $tmp_dir: $!";
@@ -314,7 +314,7 @@ if(not defined($dirty)){
 }
 
 if(defined($post)){
-	print STDERR "Post-processing results..." if $verbose;
+	print STDERR "Post-processing results...\n" if $verbose;
 	#build HMM to step link hash
 	my $step = &build_step_ev_hash($hmm_lib_path);
 	#build HMM to GO-term link hash
