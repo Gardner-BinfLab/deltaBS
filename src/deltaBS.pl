@@ -255,7 +255,7 @@ close OUT;
 print STDERR "done.\n" if $verbose;
 print STDERR "Incompatible architectures detected in orthologous CDSes, printed to $outdir/inc_archs.dbs\n";
 
-die "No compatible architectures found; something horribly wrong.\n" if (scalar @score_dist == 0); #really shouldn't happen
+die "No compatible architectures found; something horribly wrong - check input files\n" if (scalar @score_dist == 0); #really shouldn't happen...unless you give it the wrong Pfam annotation file
 
 #get population mean
 my $mean = &calc_mean(@score_dist);
