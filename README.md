@@ -3,7 +3,7 @@ deltaBS
 
 Quantifying the significance of genetic variation using probabilistic profile-based methods.
 
-To run, you need to have HMMER3 installed. You also need to download the Pfam HMM collection from ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release (we use Pfam-A.hmm). When running deltaBS, the option -hd specifies the directory that HMMER3 has been installed in and -hp specifies the directory that the Pfam HMMs have been dowloaded to. 
+To run, you need to have HMMER3 installed (http://hmmer.janelia.org/). You also need to download the Pfam HMM collection from ftp://ftp.ebi.ac.uk/pub/databases/Pfam/current_release (we use Pfam-A.hmm). When running deltaBS, the option -hd specifies the directory that HMMER3 has been installed in and -hp specifies the directory that the Pfam HMMs have been dowloaded to. 
 
 Once you have installed the Pfam HMMs, hmmpress must be used once to prepare the HMM database for use.
 
