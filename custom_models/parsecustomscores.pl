@@ -3,31 +3,16 @@
 use warnings;
 use strict;
 
-# input: ./parsecustomscores.pl [path to lookup table of models] [path to ortholog list] [output file name]
+# input: ./parsecustomscores.pl [path to ortholog list] [directory with hmmsearch files in it]
+# output: file containing custom scores, and ortholog list of those genes which didn't receive custom scores, for Pfam analysis
 
 # read in models and their orthologs for scoring then print out a table of scores for each representative
 
-my $lookup = shift @ARGV;
 my $orthlist = shift @ARGV;
-my $outfile = shift @ARGV;
-
-my %queries;
-
-open IN, $lookup;
-while (<IN>) {
-	chomp;
-	my @split = split /\t/;
-	my $model = shift @split;
-	if ($model =~ /^(\S+)/) {
-		$model = $1;
-	}
-	@{$queries{$model}} = @split;
-	
-}
+my $dir = shift @ARGV;
 
 my %lookup;
-
-my @searchfiles = `ls */*.search`;
+my @searchfiles = `ls $dir*.search`;
 foreach my $search (@searchfiles) {
 	open SEARCH, $search;
 	while (<SEARCH>) {
@@ -38,29 +23,29 @@ foreach my $search (@searchfiles) {
 	}
 }
 
-open ORTHS, $orthlist;
+my %orthologs;
+open ORTHS, $orthlist or die "Couldn't open orthlist";
 while (<ORTHS>) {
 	chomp;
 	my @split = split /\t/;
-	foreach my $gene (@split) {
+	if ($#split >0) {
 		$orthologs{$split[0]} = $split[1];
 	}
 }
 
-open OUT, "> $comp/customscores.tsv";
-open MISS, "> $comp/no_cust_score.txt";
+open OUT, "> customscores.tsv";
+open MISS, "> no_cust_score.txt";
 my $index2;
-foreach my $gene (keys(%orthlist)) {
-	if (defined($lookup{$gene}{gene}) && defined($lookup{$gene}{$orthologs{$gene}})) {
+foreach my $gene (keys(%orthologs)) {
+	next if ($orthologs{$gene} eq "NA");
+	if (defined($lookup{$gene}{$gene}) && defined($lookup{$gene}{$orthologs{$gene}})) {
 		my $dbs = $lookup{$gene}{$gene} - $lookup{$gene}{$orthologs{$gene}};
 		print OUT "$gene\t$orthologs{$gene}\t$lookup{$gene}{$gene}\t$lookup{$gene}{$orthologs{$gene}}\t$dbs\n";
 	}
 	else {
 		if (defined($orthologs{$gene}) && $orthologs{$gene} ne "NA") {
-			print MISS "$1\t$orthologs{$gene}\n";
+			print MISS "$gene\t$orthologs{$gene}\n";
 		}
-	}
-	
 	}
 }
 close OUT;
