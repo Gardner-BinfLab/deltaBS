@@ -8,10 +8,11 @@ use Data::Dumper;
 
 # arguments: filename 
 
-my $filename = shift @ARGV;		# phmmer chunk
+my $filename = shift @ARGV;		# jackhmmer chunk
 my $outdir = "filtered";		# filtered_sequences
-system "mkdir $outdir";
 my $HOME = $ENV{"HOME"};
+system "mkdir $HOME/$outdir";
+#system "mkdir $HOME/troubleshooting";
 
 my %sequences;
 my %gaps;
@@ -52,7 +53,7 @@ close IN;
 
 # go through each hit and determine the percentage identity
 foreach my $gene (@genes) {
-#	open PIDS, ">> troubleshooting/$gene.pids.txt";
+#	open PIDS, ">> $HOME/troubleshooting/$gene.pids.txt";
 	foreach my $seq (keys(%{$sequences{$gene}})){
 		next if ($seq eq "$gene");
 		my $alignmentlength = $#{$sequences{$gene}{$seq}} + 1;
@@ -101,7 +102,7 @@ foreach my $gene (@genes) {
 	# then print all qualifying sequences
 	foreach my $seq (keys(%{$percentids{$gene}})) {
 		next if ($seq eq $original);
-		if($percentids{$gene}{$seq}>0.4) {				# 40% ID cutoff is hard-coded in here - edit at own risk
+		if($percentids{$gene}{$seq}>0.1) {				# 40% ID cutoff is hard-coded in here - edit at own risk
 			print OUT ">$seq\n";
 			foreach my $res (0..$#{$sequences{$gene}{$seq}}) {
 				if (isAA($sequences{$gene}{$seq}[$res])) {

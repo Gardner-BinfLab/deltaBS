@@ -20,6 +20,7 @@ chomp $chunks;
 if ($chunks =~ /\s(\S+)$/) {
 	$chunks=$1;
 }
+system "mkdir models";
 
 system "mkdir -p /home/new26/$$";
 system "qsub -pe multi_thread 8 -N hmmbuild$$ -S /usr/bin/perl -q \42all.q\42 -V -v PATH -v PERL5LIB -e $HOME/$$ -o $HOME/$$/$$\_qsub.out -t 1-$chunks runjob.hmmbuild.pl";
