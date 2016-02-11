@@ -1,0 +1,257 @@
+\documentclass[fleqn,10pt]{SelfArx} % Document font size and equations flushed left
+
+
+\definecolor{color1}{RGB}{0,0,90} % Color of the article title and sections
+\definecolor{color2}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+
+\JournalInfo{Supplementary Text} % Journal information ``Journal, Vol. XXI, No. 1, 1-5, 2015''
+\Archive{ } % Additional notes (e.g. copyright, DOI, review/research article)
+
+\PaperTitle{Technical details for: A profile-based method for measuring the impact of genetic variation} % Article title
+
+\Authors{Nicole E. Wheeler\textsuperscript{1}*, Lars Barquist\textsuperscript{2}, Fatemeh Ashari Ghomi\textsuperscript{1}, Robert Kingsley\textsuperscript{3}, Paul P. Gardner\textsuperscript{1,4}} % Authors
+\affiliation{\textsuperscript{1}\textit{School of Biological Sciences, University of Canterbury, Christchurch, New Zealand.}} % Author affiliation
+\affiliation{\textsuperscript{2}\textit{Institute for Molecular Infection Biology, University of Wuerzburg, Wuerzburg, Germany.}} % Author affiliation
+\affiliation{\textsuperscript{3}\textit{Institute of Food Research, Norwich Research Park, Norwich, Norfolk, United Kingdom.}}
+\affiliation{\textsuperscript{4}\textit{Biomolecular Interaction Centre and the Bio-Protection Research Centre, University of Canterbury, Christchurch, New Zealand.}}
+\affiliation{*\textbf{Corresponding author}: nicole.wheeler@pg.canterbury.ac.nz} % Corresponding author
+
+\Keywords{genome variation --- genotype --- phenotype} % Keywords - if you don't want any simply remove all the text between the curly brackets
+\newcommand{\keywordname}{Keywords} % Defines the keywords heading name
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\Abstract{In the following we provide some mathematical justification
+  for the Delta bitscore metric that we evaluate in the accompanying
+  manuscript.}
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+%\tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section*{Introduction} % The \section*{} command stops section numbering
+
+In this document we compare the mathematics motivating profile HMM
+\cite{Krogh:1994,BSA1998} based methods for quantifying the likely
+phenotypic significance of genetic variation. We focus on methods
+that compare a reference ($ref$) sequence to a variant ($var$)
+\cite{Clifford:2004,Shihab:2013,Shihab:2013a,Shihab:2014,Liu:2014,Liu:2015}
+These methods are the \emph{logR.E-value} approach
+\cite{Clifford:2004}, \emph{FATHMM}
+\cite{Shihab:2013,Shihab:2013a,Shihab:2014}, HMMvar
+\cite{Liu:2014,Liu:2015} and \emph{DBS} (this study).
+
+\section{Methods}
+
+
+
+\subsection{Delta bitscore (DBS)}
+
+We define delta bitscore (DBS) as: 
+
+\begin{eqnarray} 
+\label{eq:dbs}
+DBS &=& \left(x_{ref} - x_{var}\right)
+\end{eqnarray}
+
+The bitscore ($x$) for an HMM is defined as a $\log$ of probability
+ratios \cite{BSA1998}:
+
+\begin{eqnarray} 
+\label{eq:bs}
+x &=& \log_2\left(\frac{P(seq|M)}{P(seq|N)} \right)
+\end{eqnarray}
+
+Where $M$ is a profile model derived from a sequence alignment. $M$
+can generate and score sequences based upon how likely they are to
+have been produced by the same process as those in the sequence
+alignment.  $N$ is a null model, that generates and scores sequences
+based upon how likely they are to have produced by a random process.
+
+Therefore, $DBS$ can be re-written as:
+
+\begin{eqnarray} 
+\label{eq:dbs}
+DBS(seq_{ref}, seq_{var}) &=&      \log_2\left(\frac{P(seq_{ref}|M)}{P(seq_{ref}|N)}\right) \nonumber\\ 
+\label{eq:dbs1}
+                                & - & \log_2\left(\frac{P(seq_{var}|M)}{P(seq_{var}|N)}\right)\\
+\label{eq:dbs2}
+                               &\approx& \log_2\left(\frac{P(seq_{ref}|M)}{P(seq_{var}|M)} \right)
+\end{eqnarray}
+
+If we make the simplifying assumption that the null models for
+$P(seq_{ref}|N)$ and $P(seq_{var}|N)$ are approximately equal
+(i.e. equal length and amino acid composition).  Therefore, the first
+term of Equation~\ref{eq:fathmm1} and Equation~\ref{eq:dbs2} are, in
+most situations, equivalent. 
+
+
+
+\subsection{logR.E-value}
+
+Clifford \emph{et al.} (2004) suggest using the following measure to
+estimate the significance of a genetic variant:
+
+\begin{equation} 
+\label{eq:logre}
+\log R.E = \log_{10}\left(\frac{E-value_{var}}{E-value_{ref}}\right)
+\end{equation}
+
+Where $E-value_{var}$ and $E-value_{ref}$ correspond to the
+expectation value derived from HMMER matches (to the same model) for a
+variant ($var$) and canonical ($can$) protein sequence. 
+
+$E-values$ are generally estimated by fitting an exponential
+distribution to an empirical (usually simulated)
+distribution. I.e. 
+
+\begin{equation} 
+\label{eq:eval}
+E-value = \kappa MN e^{\lambda x}
+\end{equation}
+
+Where $x$ is the bit-score for a match between a profile HMM and a
+sequence, $MN$ is the product of the database size and the model length
+and, finally $\kappa$ and $\lambda$ are parameters that ensure the
+intercept with the y-axis is correct and that the curve matches an
+empirical distribution .
+
+In a breakthrough theoretical paper by Sean Eddy \cite{Eddy:2008}, he
+showed that the most computationally expensive parameter to estimate
+($\lambda$) is a constant i.e.  $\lambda=\ln(2)$.
+
+Thus Equation~\ref{eq:logre} can be rewritten as: 
+
+\begin{eqnarray}
+%\begin{align*}
+\label{eq:logre2}
+\log R.E %&=& \log_{10}\left(E-value_{var}\right) - \log_{10}\left(E-value_{ref}\right)\\
+       &=& \log_{10} \left( e^{\lambda x_{var}} \right) - \log_{10} \left( e^{\lambda x_{ref}} \right)  \\
+       &=& \left(x_{var}-x_{ref}\right)*\log_{10}(e^{\lambda})                                   \nonumber \\
+       &=& -DBS*constant \nonumber 
+%\end{align*}
+\end{eqnarray}
+
+If the base for the exponential and the logarithms had been equal,
+then $constant$ the constant would equal $\lambda$. In either case, a
+constant multiplied by the difference between two bitscores is all
+that remains.
+
+\subsection{FATHMM}
+
+Shihab \emph{et al} (2013) define the following unweighted measure for
+estimating the significance of a single non-synonymous SNP (the
+weighted version is trained to discriminate human disease from
+polymorphic variation, therefore is not directly comparable to our
+general approach) \cite{Shihab:2013}. Their metric is a logit or log-odds value, comparing the
+emission probability of the wild-type variant ($P_{ref}$) and a mutant
+variant ($P_{var}$) when the mutant is a single, non-synonymous point
+mutation (i.e. not multiple point mutations or indels):
+
+\begin{eqnarray}
+%\begin{align*}
+\label{eq:fathmm}
+unweighted &=& \ln \left( \frac{P_{var}/(1-P_{var})}{P_{ref}/(1-P_{ref})} \right)\\
+\label{eq:fathmm1}
+           &=& \ln \left( \frac{P_{var}}{P_{ref}} \right) + \ln \left( \frac{1-P_{ref}}{1-P_{var}} \right) \\ %\nonumber \\
+\label{eq:fathmm2}
+           &\approx& -DBS + \ln \left( \frac{1-P_{ref}}{1-P_{var}} \right)                                
+%\end{align*}
+\end{eqnarray}
+
+The value $1-P_{ref}$ and  $1-P_{var}$ can be re-written as the following summation: 
+
+\begin{eqnarray} 
+\label{eq:logitw}
+1-P_{ref}=\sum_{i\in{amino-acids},i\ne ref} P_i\\
+\label{eq:logitm}
+1-P_{var}=\sum_{j\in{amino-acids},j\ne var} P_j
+\end{eqnarray}
+
+Equations~\ref{eq:logitw}\&\ref{eq:logitm} share 18 terms (for each of
+the 20 amino acids, less the ones corresponding to the wild-type (w)
+and mutant (m) variants. Therefore, $1-P_{ref} \approx 1-P_{var}$ for most
+realistic biological results. As a consequence, the second term of
+Equation~\ref{eq:fathmm2} is approximately zero (or at least, modest
+in comparison to the first term when there is a large difference
+between $P_{ref}$ and $P_{var}$). Therefore a difference between bitscores is
+the term that dominates Equation~\ref{eq:fathmm}.% (see the discussion below). 
+
+\subsection{HMMvar}
+
+Liu \emph{et al} (2014\&2015) present a similar metric to \emph{FATHMM}
+for estimating the significance of variation using a profile-HMM based
+approach, with some important differences in the implementation
+\cite{Liu:2014,Liu:2015}.  The authors calculate the probability of
+each sequence directly from \emph{HMMER3} bitscores using $P =
+P_{null} *e^B$, where $P_{null} = exp(l*\log(P_1)+\log(1-P_1))$, the
+sequence length is $l$ and $P_1 = \frac{350}{351}$.
+
+\begin{eqnarray}
+%\begin{align*}
+\label{eq:hmmvar}
+S &=&  \frac{P_{ref}/(1-P_{ref})}{P_{var}/(1-P_{var})} \\
+\log_2\left(S\right) &=&  \log_2\left(\frac{P_{ref}/(1-P_{ref})}{P_{var}/(1-P_{var})}\right) \\
+                     &=&  \log_2\left(\frac{P_{ref}}{P_{var}}\right) - \\ 
+                     & &  \log_2\left(\frac{1-P_{var}}{1-P_{ref}}\right) \\
+                     &\approx& -\log_2\left(\frac{1-P_{var}}{1-P_{ref}}\right) - DBS
+%\end{align*}
+\end{eqnarray}
+
+Liu \emph{et al} do discuss the possibility of using $DBS$, which they
+call $D$, they conclude that ``prediction results using $D$ were not
+better than for $S$, and hence are not reported here''.
+
+\section{Discussion}
+
+As a consequence, the measures used by the \emph{$\log$R.E-value}
+(Equation~\ref{eq:logre2}) and the \emph{FATHMM}
+(Equation~\ref{eq:fathmm2}) approach are approximations to the more
+direct estimation of significance, $DBS$. In the case of
+\emph{FATHMM}, only single point mutations are considered, missing the
+wealth of variation due to insertions, deletions, multiple SNPs and
+and other larger-scale variants.
+
+The \emph{HMMvar} approach is similar to DBS, this method employs full
+length HMMs (including indel states), just like $DBS$. 
+
+Consequently, $DBS$ is a direct measure of the potential impact of
+genetic variation, that can be used on small as well as large and
+complex variants. We propose that this metric can be used to evaluate
+both population variation as well as variation between species. The
+mean of the distribution should be approximately zero, while the
+variance will increase with increasing phylogenetic distance (and
+different levels of selection). 
+
+One factor that may have an undue influence on $DBS$ is in the rare
+cases where the optimal alignment between a the profile and the
+variant and the profile and the canonical sequence differ. For
+example, \emph{HMMER3} currently only has a local mode (i.e. no
+``glocal'' option). As a result, split matches can occur, and
+alignment slippage is also possible, particularly for repetitive
+sequences.
+
+One way to mitigate these possibilities is to use \emph{Forward
+  Scores}, which rather than reporting just the value for an optimal
+alignment, reports instead the sum of all possible alignments between
+a query sequence and the profile model. 
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+\bibliographystyle{unsrt}
+\bibliography{paulall}
+
+\end{document}
+
+
