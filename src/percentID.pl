@@ -12,7 +12,7 @@ my $filename = shift @ARGV;		# jackhmmer chunk
 my $outdir = "filtered";		# filtered_sequences
 my $HOME = $ENV{"HOME"};
 system "mkdir $HOME/$outdir";
-#system "mkdir $HOME/troubleshooting";
+system "mkdir $HOME/troubleshooting";
 
 my %sequences;
 my %gaps;
@@ -29,6 +29,7 @@ while(<IN>) {
 	if ($_ =~ /=GF\ ID\ (\S+)-i1/) {
 		$original = $1;
 		push @genes, $1;
+		print $1, "\n";
 	}
 	elsif ($_ =~ /^#/) {
 		next;
@@ -51,9 +52,11 @@ while(<IN>) {
 
 close IN;
 
+print Dumper (\@genes);
+
 # go through each hit and determine the percentage identity
 foreach my $gene (@genes) {
-#	open PIDS, ">> $HOME/troubleshooting/$gene.pids.txt";
+	open PIDS, ">> $HOME/troubleshooting/$gene.pids.txt";
 	foreach my $seq (keys(%{$sequences{$gene}})){
 		next if ($seq eq "$gene");
 		my $alignmentlength = $#{$sequences{$gene}{$seq}} + 1;
@@ -68,11 +71,12 @@ foreach my $gene (@genes) {
 		}
 		my $percentid = $matchcounts{$seq}/$alignmentlength;
 		$percentids{$gene}{$seq} = $percentid;
-#		printf PIDS "%0.2f\t$seq\n", ($matchcounts{$seq}/$alignmentlength*100);
+		printf PIDS "%0.2f\t$seq\n", ($matchcounts{$seq}/$alignmentlength*100);
 	}
 #	close PIDS;
 	#produce output file once all PIDs have been calculated
 	my $outfile = "$HOME/filtered/$gene.fasta";
+	print $outfile, "\n";
 	# print query sequence when file is created - DON'T!!!
 #	if (-e $outfile) {
 		open OUT, ">> $outfile";

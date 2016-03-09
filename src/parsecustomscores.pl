@@ -12,7 +12,7 @@ my $orthlist = shift @ARGV;
 my $dir = shift @ARGV;
 
 my %lookup;
-my @searchfiles = `ls $dir*.search`;
+my @searchfiles = `ls $dir/*.search`;
 foreach my $search (@searchfiles) {
 	open SEARCH, $search;
 	while (<SEARCH>) {
