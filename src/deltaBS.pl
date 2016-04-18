@@ -13,12 +13,13 @@ use Data::Dumper;
 
 use Getopt::Long;
 
-my ($embl1, $embl2, $pfamannot1, $pfamannot2, $phmmerannot1, $phmmerannot2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $dirty, $help);
+my ($filetype, $file1, $file2, $pfamannot1, $pfamannot2, $phmmerannot1, $phmmerannot2, $outdir, $orthlist, $hmmer_path, $easel_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $dirty, $help);
 my $identifier = int(rand(10000));
 
 &GetOptions(
-	"e1|embl1=s"	     => \$embl1,
-	"e2|embl2=s"	     => \$embl2,
+	"f|filetype=s"	     => \$filetype,
+	"f1|file1=s"	     => \$file1,
+	"f2|file2=s"	     => \$file2,
 	"o|outdir=s"	     => \$outdir,
 	"ol|orthlist=s"	     => \$orthlist,
         "pa1|pfamannot1=s"   => \$pfamannot1,
@@ -26,6 +27,7 @@ my $identifier = int(rand(10000));
         "ph1|phmmerannot1=s" => \$phmmerannot1,
         "ph2|phmmerannot2=s" => \$phmmerannot2,
 	"hp|hmmerpath=s"     => \$hmmer_path,
+	"ep|easelpath=s"     => \$easel_path,
 	"c|cpus=i"	     => \$cpus,
 	"hd|hmmlibdir=s"     => \$hmm_lib_path,
 	"t|tempdir=s"	     => \$tmp_dir,
@@ -41,14 +43,23 @@ if ($help) {
 	exit(1);
 }
 
-elsif (not defined($embl1) or not defined($embl2)){
-	print "ERROR: need embl files to work with!\n";
+if(not defined($filetype) or ($filetype ne "embl" & $filetype ne "genbank" & $filetype ne "fasta")){
+	print "ERROR: filetype must be specified as either 'embl', 'genbank', or 'fasta'\n";
+	&help();
+	exit(1);
+} 
+elsif ($verbose) {
+	print STDERR "filetype set to $filetype\n";
+}
+
+if (not defined($file1) or not defined($file2)){
+	print "ERROR: need $filetype files to work with!\n";
 	&help();
 	exit(1);
 }
 
-elsif (not -s $embl1 or not -s $embl2){
-	print "ERROR: [$embl1] &/or [$embl1] is missing or empty!\n";
+elsif (not -s $file1 or not -s $file2){
+	print "ERROR: [$file1] &/or [$file2] is missing or empty!\n";
 	&help();
 	exit(1);
 }
@@ -64,6 +75,13 @@ elsif (not defined($hmmer_path) && (not defined $ENV{'HMMER'})){
 	&help();
 	exit(1);
 }
+
+elsif (not defined($easel_path) && (not defined $ENV{'EASEL'})){
+	print "ERROR: EASEL path not provided and EASEL environment variable not set!\n";
+	&help();
+	exit(1);
+}
+
 
 elsif (not defined($hmm_lib_path) && (not defined $ENV{'DELTABS'})){
 	print "ERROR: HMM library path not set and DELTABS environment variable not set!\n";
@@ -107,34 +125,38 @@ if (defined($post)){
 system("mkdir -p $outdir") == 0 or die "Couldn't create $outdir: $!";
 
 #generate fasta files, get annotation hash refs
-print STDERR "Generating proteome fasta files in $tmp_dir...\n" if $verbose;
-my $fasta1 = "$tmp_dir/DELTABS_embl1.fasta";
-my $fasta2 = "$tmp_dir/DELTABS_embl2.fasta";
-#my $fasta1 = "tmp/DBS.8392/DELTABS_embl1.fasta";
-#my $fasta2 = "tmp/DBS.8392/DELTABS_embl2.fasta";
-my $embl1_genes = &write_CDS_fasta($embl1,$fasta1);
-my $embl2_genes = &write_CDS_fasta($embl2,$fasta2);
-print STDERR "done.\n" if $verbose;
-
+my ($fasta1, $fasta2);
+if($filetype ne "fasta"){
+	print STDERR "Generating proteome fasta files in $tmp_dir...\n" if $verbose;
+	$fasta1 = "$tmp_dir/DELTABS_embl1.fasta";
+	$fasta2 = "$tmp_dir/DELTABS_embl2.fasta";
+	my $embl1_genes = &write_CDS_fasta($file1,$filetype,$fasta1);
+	my $embl2_genes = &write_CDS_fasta($file2,$filetype, $fasta2);
+	print STDERR "done.\n" if $verbose;
+} else {
+	print STDERR "Input in fasta format, no need to generate proteome files.\n" if $verbose;
+	$fasta1 = $file1;
+	$fasta2 = $file2;
+}
 ######################################################################
 #run hmmscan on the proteomes with Pfam HMMs:
 
 if(not defined($pfamannot1)){
-    $pfamannot1 = "$embl1-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$embl1] sequences with Pfam HMMs...\n" if $verbose;
+    $pfamannot1 = "$file1-pfam_hmmscan1.tbl";
+    print STDERR "Running hmmscan on [$file1] sequences with Pfam HMMs...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
-    print STDERR"skipping hmmscan\'ing [$embl1]. Using [$pfamannot1] instead.\n" if $verbose;
+    print STDERR"skipping hmmscan\'ing [$file1]. Using [$pfamannot1] instead.\n" if $verbose;
 }
 
 if(not defined($pfamannot2)){
-    $pfamannot2 = "$embl2-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$embl2] sequences with Pfam HMMs...\n" if $verbose;
+    $pfamannot2 = "$file2-pfam_hmmscan1.tbl";
+    print STDERR "Running hmmscan on [$file2] sequences with Pfam HMMs...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
-    print STDERR "skipping hmmscan\'ing [$embl2]. Using [$pfamannot2] instead.\n" if $verbose;
+    print STDERR "skipping hmmscan\'ing [$file2]. Using [$pfamannot2] instead.\n" if $verbose;
 }
 
 print STDERR "done hmmscan\47ing.\n" if $verbose;
@@ -226,7 +248,7 @@ foreach my $key (keys(%orths)){
 			@{$dbs{$key}[$i]} = ($arch1->[$i][0], $arch1->[$i][3], $arch1->[$i][4],$arch1->[$i][2], $arch2->[$i][3], $arch2->[$i][4],$arch2->[$i][2], $score);
 		}
 	} else {
-		$inc =1;
+		$inc = 1;
 		open OUT, ">>", $inc_file;
 		print OUT $key,";",$orths{$key},";";
 		my $first = 1;
@@ -253,9 +275,13 @@ foreach my $key (keys(%orths)){
 }
 close OUT;
 print STDERR "done.\n" if $verbose;
-print STDERR "Incompatible architectures detected in orthologous CDSes, printed to $outdir/inc_archs.dbs\n";
+print STDERR "Incompatible architectures detected in orthologous CDSes, printed to $outdir/inc_archs.dbs\n" if $inc;
 
 die "No compatible architectures found; something horribly wrong - check input files\n" if (scalar @score_dist == 0); #really shouldn't happen...unless you give it the wrong Pfam annotation file
+
+print STDERR "Calculating empirical cutoff:\n" if $verbose;
+my $emp_cut = &calc_emp_cutoff(@score_dist);
+print STDERR $emp_cut, "\n";
 
 #get population mean
 my $mean = &calc_mean(@score_dist);
@@ -274,6 +300,12 @@ print STDERR "Calculating Z-scores, p-values...\n" if $verbose;
 my @outtable;
 foreach my $key (keys(%dbs)){
 	foreach my $dom (@{$dbs{$key}}){
+		my $ex;
+		if(abs($dom->[7]) > $emp_cut){
+			$ex = 1;
+		} else {
+			$ex = 0;
+		}
 		my $z = &calc_z($dom->[7], 0, $sd);
 		my $pval;
 		if ($z > 0){
@@ -281,7 +313,7 @@ foreach my $key (keys(%dbs)){
 		} else {
 			$pval = 2*(Statistics::Distributions::uprob(abs($z)));
 		}
-		push @outtable, [$key,$orths{$key}, $dom->[0],$dom->[1],$dom->[2],$dom->[3],$dom->[4],$dom->[5],$dom->[6],$dom->[7],$z,$pval];
+		push @outtable, [$key,$orths{$key}, $dom->[0],$dom->[1],$dom->[2],$dom->[3],$dom->[4],$dom->[5],$dom->[6],$dom->[7],$z,$pval, $ex];
 	}
 }
 print STDERR "done.\n" if $verbose;
@@ -290,7 +322,7 @@ print STDERR "Sorting, printing results...\n" if $verbose;
 #sort out table, print results!
 my @sortedtable = sort{$b->[9] <=> $a->[9]} @outtable;
 open OUT, ">$outdir/results.dbs";
-print OUT "# MEAN: ",$mean," SD: ", $sd,"\n";
+print OUT "# MEAN: ",$mean," SD: ", $sd,"EMP_CUT: ", $emp_cut,"\n";
 foreach my $row (@sortedtable){
 	my $first = 1;
 	foreach my $entry (@$row){
@@ -310,7 +342,7 @@ print STDERR "Cleaning up temp files...\n" if $verbose;
 #clean up
 if(not defined($dirty)){
     system("rm -rf $tmp_dir") == 0 or die "Couldn't rm $tmp_dir: $!";
-    print STDERR "done. Results should be in $outdir/results.dbs\n" if $verbose;
+    print STDERR "done.\n" if $verbose;
 }
 
 if(defined($post)){
@@ -494,6 +526,36 @@ sub calc_mean {
 	my $mean = $sum / $count;
 	return $mean;
 }
+###################################################
+#calc_emp_cutoff:  Identify narrower side of dist,
+#return 2.5% cutoff
+###################################################
+sub calc_emp_cutoff {
+	my (@values) = @_;
+	my @pos;
+	my @neg;
+
+	foreach (@values) {
+		push(@pos, $_) if($_ >= 0);
+		push(@neg, -$_) if($_ <= 0);
+	}
+	@pos = sort{$a <=> $b} @pos;
+	@neg = sort{$a <=> $b} @neg;
+	my($p_cut, $n_cut);
+	if($#pos > 0){
+		$p_cut = $pos[int($#pos*97.5)/100];
+	} else {
+		$p_cut = 0;
+	}
+	if($#neg > 0) {
+		$n_cut = $neg[int($#neg*97.5)/100];
+	} else {
+		$n_cut = 0;
+	} 
+	return($p_cut) if $p_cut < $n_cut;
+	return($n_cut);
+}
+	
 ###################################################
 #calc_sd: Calculate standard deviation given an
 #array of values and the population mean
@@ -868,7 +930,7 @@ sub find_seq_lengths {
 	my ($name);
 	my %l;
 	
-	open(STAT, "esl-seqstat -a $fasta |") or die "Unable to open pipe for [esl-seqstat -a $fasta].\n[$!]";
+	open(STAT, "$easel_path/esl-seqstat -a $fasta |") or die "Unable to open pipe for [esl-seqstat -a $fasta].\n[$!]";
 	while(<STAT>){
 	    if(/^\=\s+(\S+)\s+(\d+)/){		
 		$l{$1}=$2; 		
@@ -885,11 +947,11 @@ sub find_seq_lengths {
 #names and products
 ###################################################
 sub write_CDS_fasta {
-	my($embl, $outfile) = @_;
+	my($embl, $format, $outfile) = @_;
 	my %gene_info;
 	
 	my $cds_coordinates  = cds_locations($embl);
-    	my $annotation_file =  Bio::SeqIO->new(-file => $embl, -format => 'EMBL') or die "Error: Couldnt open embl file: $!\n";
+    	my $annotation_file =  Bio::SeqIO->new(-file => $embl, -format => $format) or die "Error: Couldnt open $format file: $!\n";
 	#my $annotation_file =  Bio::SeqIO->new(-file => $embl, -format => 'GENBANK') or die "Error: Couldnt open GENBANK file: $!\n";
 
 	open OUT, ">$outfile" or die "Couldn't open file for writing: $!\n";
@@ -1083,12 +1145,13 @@ sub help {
 DeltaBS: monitoring functional changes in protein domains using HMMs
 Version 0.1 5/4/2013; Author: Lars Barquist
 ####################################################################
-Usage: $0 -e1 <reference embl file> -e2 <comparator embl> -o <output directory> -hp <path to hmmer> -hd <path to hmm libraries> -t <temp directory> [-options]
+Usage: $0 -f <filetype> -f1 <reference file> -f2 <comparator file> -o <output directory> -hp <path to hmmer> -hd <path to hmm libraries> -t <temp directory> [-options]
 
 Options:
 	-h  / --help		:	This screen
-	-e1 / --embl1		:	Reference genome with annotations in EMBL format
-	-e2 / --embl2		:	Comparator genome with annotations in EMBL format
+	-f  / --filetype	:	Specify filetype, must be 'embl', 'genbank', or 'fasta'
+	-f1 / --file1		:	Reference genome/proteome in filetype format
+	-f2 / --file2		:	Comparator genome/proteome in filetype format
 	-pa1/ --pfamannot1      :       Pfam annotations of proteome1
 	-pa2/ --pfamannot2      :       Pfam annotations of proteome2
 	-ph1/ --phmmerannot1    :       phmmer domtblout of proteome1 vs proteome2
@@ -1102,13 +1165,6 @@ Options:
 	-p  / --post		:	Enable post-processing (pathways, etc.)
 	-d  / --dirty           :       Do not delete /tmp file
 	-v  / --verbose		:	Turn on verbose messaging
-
-TODO:
-
-1. Find a more accurate approach for ortholog mappings
-2. try hmmsearch instead of hmmscan
-3. ortholog: use reciprocal 80% coverage
-
 
 EOF
 }
