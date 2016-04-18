@@ -543,12 +543,12 @@ sub calc_emp_cutoff {
 	@neg = sort{$a <=> $b} @neg;
 	my($p_cut, $n_cut);
 	if($#pos > 0){
-		$p_cut = $pos[int($#pos*97.5)/100];
+		$p_cut = $pos[int($#pos*.975)];
 	} else {
 		$p_cut = 0;
 	}
 	if($#neg > 0) {
-		$n_cut = $neg[int($#neg*97.5)/100];
+		$n_cut = $neg[int($#neg*.975)];
 	} else {
 		$n_cut = 0;
 	} 
