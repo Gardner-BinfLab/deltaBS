@@ -8,12 +8,13 @@ use Bio::Perl;
 use Bio::SeqIO;
 use Bio::SearchIO;
 use Bio::SeqFeature::Generic;
+use Bio::DB::Fasta;
 use Statistics::Distributions;
 use Data::Dumper;
 
 use Getopt::Long;
 
-my ($filetype, $file1, $file2, $pfamannot1, $pfamannot2, $phmmerannot1, $phmmerannot2, $outdir, $orthlist, $hmmer_path, $easel_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $dirty, $help);
+my ($filetype, $file1, $file2, $pfamannot1, $pfamannot2, $phmmerannot1, $phmmerannot2, $outdir, $orthlist, $hmmer_path, $cpus, $hmm_lib_path, $tmp_dir, $verbose, $post, $dirty, $help);
 my $identifier = int(rand(10000));
 
 &GetOptions(
@@ -27,7 +28,6 @@ my $identifier = int(rand(10000));
         "ph1|phmmerannot1=s" => \$phmmerannot1,
         "ph2|phmmerannot2=s" => \$phmmerannot2,
 	"hp|hmmerpath=s"     => \$hmmer_path,
-	"ep|easelpath=s"     => \$easel_path,
 	"c|cpus=i"	     => \$cpus,
 	"hd|hmmlibdir=s"     => \$hmm_lib_path,
 	"t|tempdir=s"	     => \$tmp_dir,
@@ -76,11 +76,11 @@ elsif (not defined($hmmer_path) && (not defined $ENV{'HMMER'})){
 	exit(1);
 }
 
-elsif (not defined($easel_path) && (not defined $ENV{'EASEL'})){
-	print "ERROR: EASEL path not provided and EASEL environment variable not set!\n";
-	&help();
-	exit(1);
-}
+#elsif (not defined($easel_path) && (not defined $ENV{'EASEL'})){
+#	print "ERROR: EASEL path not provided and EASEL environment variable not set!\n";
+#	&help();
+#	exit(1);
+#}
 
 
 elsif (not defined($hmm_lib_path) && (not defined $ENV{'DELTABS'})){
@@ -143,7 +143,7 @@ if($filetype ne "fasta"){
 
 if(not defined($pfamannot1)){
     $pfamannot1 = "$file1-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$file1] sequences with Pfam HMMs...\n" if $verbose;
+    print STDERR "Running hmmscan on [$file1] sequences with HMM database...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot1 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta1 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
@@ -152,7 +152,7 @@ else{
 
 if(not defined($pfamannot2)){
     $pfamannot2 = "$file2-pfam_hmmscan1.tbl";
-    print STDERR "Running hmmscan on [$file2] sequences with Pfam HMMs...\n" if $verbose;
+    print STDERR "Running hmmscan on [$file2] sequences with HMM database...\n" if $verbose;
     system("$hmmer_path/hmmscan -o /dev/null --noali --cpu $cpus --domtblout $pfamannot2 --cut_tc $hmm_lib_path/deltaBS.hmmlib $fasta2 1>&2") == 0 or die "hmmscan failed: $!";
 }
 else{
@@ -218,27 +218,8 @@ my $inc_file = "$outdir/inc_archs.dbs";
 unlink $inc_file if ( -e $inc_file);
 foreach my $key (keys(%orths)){
 	next if(!defined($scan1->{$key}) || !defined($scan2->{$orths{$key}}));
-	#my $hits = $scan1->{$key}; 
-	#print "HITS!! ",$hits->[0][0],"\n";
-	#print "DUMP SCAN", Dumper $scan1->{$key};
-	#print $key, "\n";
 	my $arch1 = &get_domain_arch($scan1->{$key});
-	#foreach my $i (0..$#{$arch1}){
-	#	print "DOM $key $i:$arch1->[$i][0]\n";
-	#}
-	#print "DUMP SCAN", Dumper $scan2->{$orths{$key}};
-	#print $orths{$key}, "\n";
 	my $arch2 = &get_domain_arch($scan2->{$orths{$key}});
-	#print "DUMP ARCH", Dumper $arch2;
-	#print "***\n";
-	#foreach my $i (0..$#{$arch2}){
-	#	print "DOM $orths{$key} $i:$arch2->[$i][0]\n";
-	#}
-	#print $key, "\t", $orths{$key},"\n";
-	#print "REF: $arch1\n";
-	#print Dumper $arch1;
-	#print "REF: $arch2\n";
-	#print Dumper $arch2;
 	if(&comp_archs($arch1, $arch2)){
 		#domain, eval, score, start, end
 		foreach my $i (0..scalar($#$arch1)){
@@ -322,7 +303,7 @@ print STDERR "Sorting, printing results...\n" if $verbose;
 #sort out table, print results!
 my @sortedtable = sort{$b->[9] <=> $a->[9]} @outtable;
 open OUT, ">$outdir/results.dbs";
-print OUT "# MEAN: ",$mean," SD: ", $sd,"EMP_CUT: ", $emp_cut,"\n";
+print OUT "# MEAN: ",$mean," SD: ", $sd," EMP_CUT: ", $emp_cut,"\n";
 foreach my $row (@sortedtable){
 	my $first = 1;
 	foreach my $entry (@$row){
@@ -614,12 +595,8 @@ sub comp_archs {
 ###################################################
 sub get_domain_arch {
 	my ($hit) = @_;
-	#print ">>",$hits,"\t", scalar($hits->[0]),"<<\n";
 	my @arch;
-	#print "HIT:", Dumper $hit;
 	my @sorted = sort {$a->[3] <=> $b->[3]} @$hit; #sort on start coords
-	#print "sorted: ", $#sorted,"\n";
-	#print "SORTED:", Dumper @sorted;
 	my %segments;
 	my $seg_count = 0;
 	my @cont;
@@ -629,14 +606,9 @@ sub get_domain_arch {
 	$segments{0} = 0;
 	foreach my $i1 (0..($#sorted - 1)){
 		foreach my $i2 (($i1 + 1)..$#sorted){
-			#print ">>",$sorted[$i1][4],"<<\n";
 			if($sorted[$i1][4] > $sorted[$i2][3]){
 				$segments{$i2} = $seg_count;
 				push @{$cont[$seg_count]}, $i2;
-				#if(not defined($segments{$i1})){
-				#	$segments{$i1} = $seg_count;
-				#	push @{$cont[$seg_count]}, $i1;
-				#}
 				last;
 			} else {
 				$seg_count++;
@@ -645,39 +617,51 @@ sub get_domain_arch {
 			}
 		}
 	}
-#	if (not defined($segments{$#sorted})){ #edge case
-#		$segments{$#sorted} = $seg_count;
-#		push @{$cont[$seg_count]}, $#sorted;
-#	}else{
-#		$seg_count --;
-#	}
 	
 	#resolve segments to single domains
 	#domain, eval, score, start, end
-	#print "SEGS: ", $seg_count, "\n";
 	foreach my $seg (0..$seg_count) {
 		if($#{$cont[$seg]} == 0){ #trivial case, n domains = 1
-			#print "here\n";
 			$arch[$seg] = [@{$sorted[$cont[$seg][0]]}];
 			next;
 		}
-			
-		my @TIGRs;
-		my @evals;
-		#print $#{$cont[$seg]},"--\n";
+		
+		#old code to prioritize TIGRfams	
+		#my @TIGRs;
+		#my @evals;
+		#foreach my $i (0..$#{$cont[$seg]}){
+		#	push(@TIGRs,$cont[$seg][$i]) if ($sorted[$cont[$seg][$i]][0] =~ /^TIGR/); 
+		#	push(@evals, $sorted[$cont[$seg][$i]][1]);
+		#}
+		#if($#TIGRs == 0){ #if only one TIGRfam, take it
+		#	$arch[$seg] = [@{$sorted[$TIGRs[0]]}];
+		#	next;
+		#}
+		#elsif($#TIGRs > 0){ #if multiple TIGRfams, compete them
+		#	my $min = 1;
+		#	my $winner;
+		#	foreach my $dom (@TIGRs){
+		#		if($sorted[$dom][1] < $min){
+		#			$min = $sorted[$dom][1];
+		#			$winner = $dom;
+		#		}
+		#	}
+		#	$arch[$seg] = [@{$sorted[$winner]}];
+		#}
+
+		my @NEWs;
 		foreach my $i (0..$#{$cont[$seg]}){
-			#print $sorted[$cont[$seg][$i]][0], "**\n";
-			push(@TIGRs,$cont[$seg][$i]) if ($sorted[$cont[$seg][$i]][0] =~ /^TIGR/); 
-			push(@evals, $sorted[$cont[$seg][$i]][1]);
+			push(@NEWs,$cont[$seg][$i]) if ($sorted[$cont[$seg][$i]][0] =~ /^newfam/); 
+			#push(@evals, $sorted[$cont[$seg][$i]][1]);
 		}
-		if($#TIGRs == 0){ #if only one TIGRfam, take it
-			$arch[$seg] = [@{$sorted[$TIGRs[0]]}];
+		if($#NEWs == 0){ #if only one newfam, take it
+			$arch[$seg] = [@{$sorted[$NEWs[0]]}];
 			next;
 		}
-		elsif($#TIGRs > 0){ #if multiple TIGRfams, compete them
+		elsif($#NEWs > 0){ #if multiple newfams, compete them
 			my $min = 1;
 			my $winner;
-			foreach my $dom (@TIGRs){
+			foreach my $dom (@NEWs){
 				if($sorted[$dom][1] < $min){
 					$min = $sorted[$dom][1];
 					$winner = $dom;
@@ -688,19 +672,15 @@ sub get_domain_arch {
 		else { #all Pfams, compete them
 			my $min = 1;
 			my $winner;
-			#print "SEG:",Dumper $cont[$seg];
 			foreach my $dom (@{$cont[$seg]}){
-				#print $dom, "dom\n";
 			        if($sorted[$dom][1] < $min){
 				    $min = $sorted[$dom][1];
-				    #print $min, "min\n";
 				    $winner = $dom;
 				}
 			}
 			$arch[$seg] = [@{$sorted[$winner]}];
 		}
 	}
-	#print "RESOLVED:", Dumper @arch;	
 	return \@arch;
 }
 	
@@ -930,13 +910,12 @@ sub find_seq_lengths {
 	my ($name);
 	my %l;
 	
-	open(STAT, "$easel_path/esl-seqstat -a $fasta |") or die "Unable to open pipe for [esl-seqstat -a $fasta].\n[$!]";
-	while(<STAT>){
-	    if(/^\=\s+(\S+)\s+(\d+)/){		
-		$l{$1}=$2; 		
-		#print "find_seq_lengths:\t[$1]\t[$2]\n"; 
-	    }	    
-	}	
+	my $fh = Bio::DB::Fasta->newFh($fasta);
+  	while (my $seq = <$fh>) {
+   		$l{$seq->display_id()} = $seq->length;
+	#	print "find_seq_lengths:\t[".$seq->display_id()."]\t[".$seq->length."]\n"; 
+  	}
+
 	return(\%l);	
 }
 
@@ -1162,7 +1141,7 @@ Options:
 	-hd / --hmmlibdir	:	Path to hmm libraries (and annotation files for post-processing)
 	-c  / --cpus            :       Number of CPUs for hmmsearch, phmmer etc to use. 
 	-t  / --tempdir		:	Path to temporary directory
-	-p  / --post		:	Enable post-processing (pathways, etc.)
+	-p  / --post		:	Enable post-processing (pathways, etc. EXPERIMENTAL)
 	-d  / --dirty           :       Do not delete /tmp file
 	-v  / --verbose		:	Turn on verbose messaging
 
