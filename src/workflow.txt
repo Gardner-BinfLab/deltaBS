@@ -1,7 +1,0 @@
-./runphmmer.pl [Uniref directory] [proteome]
-./runpercentID.pl
-./runmafft.pl
-./runhmmbuild.pl
-[run hmmscan on query proteomes]
-./parsecustomscores.pl
-./deltaBS_fasta.pl -f1 [reference proteome] -f2 [comparator proteome] -ol [no_cust_score.txt] -o [output directory] -hp /usr/local/bin/ -hd [Pfam model directory] -t /tmp
