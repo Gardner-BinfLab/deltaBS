@@ -304,6 +304,7 @@ print STDERR "Sorting, printing results...\n" if $verbose;
 my @sortedtable = sort{$b->[9] <=> $a->[9]} @outtable;
 open OUT, ">$outdir/results.dbs";
 print OUT "# MEAN: ",$mean," SD: ", $sd," EMP_CUT: ", $emp_cut,"\n";
+print OUT "gene_1\tgene_2\tHMM\tstart_gene_1\tend_gene_1\tbitscore_gene_1\tstart_gene_2\tend_gene_2\tbitscore_gene_2\tdelta-bitscore\tz-score\tp-value\tloss_of_function\n";
 foreach my $row (@sortedtable){
 	my $first = 1;
 	foreach my $entry (@$row){
