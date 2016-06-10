@@ -929,7 +929,7 @@ sub write_CDS_fasta {
 	my($embl, $format, $outfile) = @_;
 	my %gene_info;
 	
-	my $cds_coordinates  = cds_locations($embl);
+	my $cds_coordinates  = cds_locations($embl, $format);
     	my $annotation_file =  Bio::SeqIO->new(-file => $embl, -format => $format) or die "Error: Couldnt open $format file: $!\n";
 	#my $annotation_file =  Bio::SeqIO->new(-file => $embl, -format => 'GENBANK') or die "Error: Couldnt open GENBANK file: $!\n";
 
@@ -1055,10 +1055,10 @@ sub get_feature_id
 ###################################################
 sub cds_locations
 {
-  my($embl_file) = @_;
+  my($embl_file, $format) = @_;
   my @cds_coordinates;
   
-  my $annotation_file =  Bio::SeqIO->new(-file => $embl_file, -format => 'EMBL') or die "Error: Couldnt open the annotation file\n";
+  my $annotation_file =  Bio::SeqIO->new(-file => $embl_file, -format => $format) or die "Error: Couldnt open the annotation file\n";
 #  my $annotation_file =  Bio::SeqIO->new(-file => $embl_file, -format => 'GENBANK') or die "Error: Couldnt open the annotation file\n";
   while (my $sequence_annotation = $annotation_file->next_seq()) 
   {
