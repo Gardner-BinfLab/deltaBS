@@ -504,7 +504,11 @@ sub calc_mean {
 		}
 		$count++;
 	}
-	my $mean = $sum / $count;
+        if ($counts > 0){
+	    my $mean = $sum / $count;
+        } else {
+            my $mean = 0;
+        }
 	return $mean;
 }
 ###################################################
@@ -556,9 +560,14 @@ sub calc_sd {
 			$count++;
 		}
 	}
-	$sd = sqrt((1/scalar($count)) * $x);
-	$sd = 1 if $sd < 1;
-	return $sd;
+        if ($counts > 0){
+	    $sd = sqrt((1/scalar($count)) * $x);
+	    $sd = 1 if $sd < 1;
+	    return $sd;
+        }
+        else {
+            return 1;
+        }
 }
 ###################################################
 #comp_archs: given two domain architectures,
