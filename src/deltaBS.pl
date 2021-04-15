@@ -504,7 +504,7 @@ sub calc_mean {
 		}
 		$count++;
 	}
-        if ($counts > 0){
+        if ($count > 0){
 	    my $mean = $sum / $count;
         } else {
             my $mean = 0;
